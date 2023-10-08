@@ -1,0 +1,12 @@
+.hover-scale {
+  transition: scale 0.3s;
+  &:hover {
+    scale: 1.2;
+  }
+}
+.hover-bg-gray-light {
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: $gray-light;
+  }
+}

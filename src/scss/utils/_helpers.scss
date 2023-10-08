@@ -1,0 +1,8 @@
+.bg-strip {
+  &:nth-child(odd) {
+    background-color: $dark;
+  }
+  &:nth-child(even) {
+    background-color: $gray;
+  }
+}

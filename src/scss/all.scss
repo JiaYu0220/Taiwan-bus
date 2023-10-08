@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap");
+
+@import "../../node_modules/bootstrap/scss/functions";
+@import "vendors/variables.scss";
+@import "vendors/variables-dark.scss";
+@import "../../node_modules/bootstrap/scss/maps";
+@import "vendors/utilities.scss";
+
+@import "bootstrap/scss/bootstrap.scss";
+
+@import "pages/index.scss";
+
+@import "components/btn.scss";
+@import "utils/helpers.scss";
+@import "utils/hover.scss";

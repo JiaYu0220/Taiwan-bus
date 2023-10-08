@@ -1,0 +1,274 @@
+.circle {
+  border: 1px solid $light;
+  border-radius: 50%;
+  animation: opacityTo50 5s linear infinite alternate both;
+}
+// 由小到大
+.circle-1 {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  left: 63%;
+  top: 86%;
+  @include media-breakpoint-up(sm) {
+    width: 68px;
+    height: 68px;
+    left: 60%;
+    top: 85%;
+  }
+  @include media-breakpoint-up(lg) {
+    width: 58px;
+    height: 58px;
+    left: 63%;
+    top: 54%;
+  }
+}
+.circle-2 {
+  width: 52px;
+  height: 52px;
+  position: absolute;
+  left: -30px;
+  top: 59%;
+  animation-delay: 2s;
+  @include media-breakpoint-up(sm) {
+    width: 77px;
+    height: 77px;
+    left: 22%;
+    top: 45%;
+  }
+  @include media-breakpoint-up(lg) {
+    width: 79px;
+    height: 79px;
+    left: 28%;
+    top: -39px;
+  }
+}
+.circle-3 {
+  width: 89px;
+  height: 89px;
+  position: absolute;
+  left: -34px;
+  top: 30%;
+  @include media-breakpoint-up(sm) {
+    width: 94px;
+    height: 94px;
+    left: -37px;
+    top: 62%;
+  }
+  @include media-breakpoint-up(lg) {
+    width: 84px;
+    height: 84px;
+    left: 24%;
+    top: 68%;
+  }
+}
+.circle-4 {
+  width: 88px;
+  height: 88px;
+  position: absolute;
+  left: 71%;
+  top: -48px;
+
+  animation-delay: 1s;
+  @include media-breakpoint-up(sm) {
+    width: 172px;
+    height: 172px;
+    left: 65%;
+    top: -103px;
+  }
+  @include media-breakpoint-up(lg) {
+    width: 130px;
+    height: 130px;
+    left: 79%;
+    top: 92%;
+  }
+}
+.circle-5 {
+  width: 144px;
+  height: 144px;
+  position: absolute;
+  left: -81px;
+  top: 28%;
+  @include media-breakpoint-up(lg) {
+    width: 144px;
+    height: 144px;
+    left: 66%;
+    top: -39px;
+  }
+}
+.circle-6 {
+  width: 158px;
+  height: 158px;
+  position: absolute;
+  left: -96px;
+  top: 33%;
+  animation-delay: 2s;
+}
+
+.nav-circle {
+  position: absolute;
+  border-radius: 50%;
+  animation: shine 5s linear infinite alternate both;
+  transition: all 0.3s;
+
+  &::after {
+    position: absolute;
+    content: "";
+    border-radius: 50%;
+    z-index: -1;
+    animation: shine 5s linear infinite alternate both;
+  }
+}
+
+@mixin nav-circle-size($size, $border_expand) {
+  width: $size;
+  height: $size;
+
+  &::after {
+    top: $border_expand;
+    left: $border_expand;
+    right: $border_expand;
+    bottom: $border_expand;
+  }
+}
+
+.nav-circle-primary {
+  top: 50%;
+  transform: translateY(-164px);
+  right: -33px;
+  border: 4px solid transparent;
+  @include nav-circle-size(210px, -40px);
+  background: linear-gradient(149deg, $primary 29.55%, #07738b 78.54%)
+      padding-box,
+    linear-gradient(149deg, $light 10%, $primary 50%) border-box;
+  box-shadow: 0px 0px 32px 0px $primary,
+    0px 0px 0px 28px rgba(28, 200, 238, 0.06);
+  &::after {
+    border: 1px solid $primary;
+    box-shadow: 0px 0px 10px 0px $primary;
+  }
+  &:hover {
+    box-shadow: 0px 0px 80px 0px $primary,
+      0px 0px 0px 80px rgba(28, 200, 238, 0.06);
+  }
+  @include media-breakpoint-up(sm) {
+    transform: translateY(-225px);
+    right: 16px;
+    @include nav-circle-size(329px, -66px);
+    box-shadow: 0px 0px 32px 0px $primary,
+      0px 0px 0px 48px rgba(28, 200, 238, 0.06);
+  }
+  @include media-breakpoint-up(lg) {
+    transform: translateY(-203px);
+    right: 90px;
+    @include nav-circle-size(252px, -50px);
+    box-shadow: 0px 0px 32px 0px $primary,
+      0px 0px 0px 36px rgba(28, 200, 238, 0.06);
+  }
+}
+
+.nav-circle-white {
+  top: 50%;
+  transform: translateY(12px);
+  right: -56px;
+  border: 4px solid #f1f1f1;
+  @include nav-circle-size(164px, -20px);
+  background: $light;
+  box-shadow: 0px 0px 8px #fff;
+  &::after {
+    border: 2px solid $light;
+    opacity: 0.37;
+    box-shadow: 0px 0px 8px 0px $light;
+  }
+  &:hover {
+    box-shadow: 0px 0px 15px #fff;
+  }
+  @include media-breakpoint-up(sm) {
+    transform: translateY(54px);
+    right: -11px;
+    @include nav-circle-size(258px, -34px);
+  }
+  @include media-breakpoint-up(lg) {
+    transform: translateY(14px);
+    right: 58px;
+    @include nav-circle-size(198px, -24px);
+  }
+}
+
+.nav-circle-warning {
+  bottom: -14px;
+  left: -61px;
+  border: 4px solid transparent;
+  @include nav-circle-size(176px, -26px);
+  background: linear-gradient(207deg, $warning 18.7%, #a98b0d 80.04%)
+      padding-box,
+    linear-gradient(207deg, $light 10%, $warning 50%) border-box;
+  box-shadow: 0px 0px 39px 0px $warning,
+    0px 0px 0px 22px rgba(252, 212, 44, 0.07);
+  &::after {
+    border: 2px solid $light;
+    opacity: 0.37;
+    box-shadow: 0px 0px 8px 0px $light;
+  }
+  &:hover {
+    box-shadow: 0px 0px 40px 0px $warning,
+      0px 0px 0px 40px rgba(252, 212, 44, 0.07);
+  }
+  @include media-breakpoint-up(sm) {
+    bottom: -44px;
+    left: -39px;
+    @include nav-circle-size(253px, -35px);
+  }
+  @include media-breakpoint-up(lg) {
+    bottom: -39px;
+    left: 4px;
+    @include nav-circle-size(186px, -30px);
+  }
+}
+
+@keyframes opacityTo50 {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes shine {
+  0% {
+    filter: brightness(90%);
+  }
+  100% {
+    filter: brightness(120%);
+  }
+}
+
+// .nav-circle-primary {
+//   position: absolute;
+//   width: 248px;
+//   height: 248px;
+//   top: 10%;
+//   left: 73%;
+//   border-radius: 50%;
+//   border: 4px solid transparent;
+//   background: linear-gradient(149deg, $primary 29.55%, #07738b 78.54%)
+//       padding-box,
+//     linear-gradient(149deg, $light 10%, $primary 50%) border-box;
+//   box-shadow: 0px 0px 32px 0px $primary,
+//     0px 0px 0px 50px rgba(28, 200, 238, 0.06);
+
+//   &::after {
+//     position: absolute;
+//     content: "";
+//     border-radius: 50%;
+//     top: -70px;
+//     left: -70px;
+//     right: -70px;
+//     bottom: -70px;
+//     border: 1px solid $primary;
+//     box-shadow: 0px 0px 10px 0px $primary;
+//     z-index: -1;
+//   }
+// }
