@@ -9,7 +9,11 @@ import { faHeart as farFaHeart } from "@fortawesome/free-regular-svg-icons";
 
 const Search = () => {
   const [search, setSearch] = useState("");
-  const [chooseCity, setChooseCity] = useState(false);
+  const [togglePanel, setTogglePanel] = useState("default");
+  const [city, setCity] = useState({
+    tw: "",
+    en: "",
+  });
 
   return (
     <>
@@ -48,36 +52,722 @@ const Search = () => {
           </div>
           {/* 鍵盤 */}
           <div className="position-fixed bottom-0 start-0 bottom-lg-initial start-lg-initial mt-lg-24 z-2">
-            <div className="w-100 w-lg-360px min-h-lg-550px">
-              <div className="bg-gray rounded-2 pt-5 pb-6 px-5 pt-sm-6 px-sm-12 pt-lg-5 px-lg-5">
-                <ul className="list-unstyled d-flex gap-4">
-                  <li className="flex-grow-2">
-                    <button
-                      type="button"
-                      className="w-100 btn btn-icon btn-outline-primary shadow text-light fs-lg-6"
+            <div className="w-100 w-lg-360px h-lg-550px bg-gray rounded-2 pt-5 pb-6 px-5 pt-sm-6 px-sm-12 pt-lg-5 px-lg-5">
+              {togglePanel === "default" ? (
+                <>
+                  {/* default togglePanel */}
+                  <ul className="list-unstyled d-flex gap-4">
+                    <li className="flex-grow-2">
+                      <button
+                        type="button"
+                        className="w-100 btn btn-icon btn-outline-primary shadow text-light fs-lg-6"
+                        onClick={() => setTogglePanel("city")}
+                      >
+                        <FontAwesomeIcon
+                          className="me-2"
+                          icon={faLocationDot}
+                        />
+                        <p>選擇縣市</p>
+                      </button>
+                    </li>
+                    {city ? (
+                      <li className="d-lg-none flex-grow-1">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                        >
+                          手動輸入
+                        </button>
+                      </li>
+                    ) : (
+                      ""
+                    )}
+                  </ul>
+                  {city ? (
+                    <ul className="list-unstyled row row-cols-5 g-3 mb-0">
+                      {/* 1 */}
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          紅
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          藍
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          1
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          2
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          3
+                        </button>
+                      </li>
+                      {/* 2 */}
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          綠
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          棕
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          4
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          5
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          6
+                        </button>
+                      </li>
+                      {/* 3 */}
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          橘
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          小
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          7
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          8
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          9
+                        </button>
+                      </li>
+                      {/* 4 */}
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                        >
+                          幹線
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                          onClick={() => setTogglePanel("more")}
+                        >
+                          更多
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                          onClick={() => setSearch("")}
+                        >
+                          c
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                          onClick={(e) =>
+                            setSearch(search + e.target.innerText)
+                          }
+                        >
+                          0
+                        </button>
+                      </li>
+                      <li className="col">
+                        <button
+                          type="button"
+                          className="w-100 h-100 btn btn-img btn-outline-primary shadow text-white"
+                          onClick={() => setSearch(search.slice(0, -1))}
+                        >
+                          <img src="icon/del.svg" alt="delete" />
+                        </button>
+                      </li>
+                    </ul>
+                  ) : (
+                    ""
+                  )}
+                </>
+              ) : togglePanel === "city" ? (
+                <ul className="list-unstyled row row-cols-4 g-3 mb-0">
+                  {/* city togglePanel */}
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="Taipei"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="Taipei"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
                     >
-                      <FontAwesomeIcon className="me-2" icon={faLocationDot} />
-                      <p>選擇縣市</p>
-                    </button>
+                      台北市
+                    </label>
                   </li>
-                  <li className="flex-grow-1">
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="NewTaipei"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="NewTaipei"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      新北市
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="Keelung"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="Keelung"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      基隆市
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="Taoyuan"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="Taoyuan"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      桃園市
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="Hsinchu"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="Hsinchu"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      新竹市
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="HsinchuCountry"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="HsinchuCountry"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      新竹縣
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="MiaoliCountry"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="MiaoliCountry"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      苗栗縣
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="Taichung"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="Taichung"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      台中市
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="NantouCounty"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="NantouCounty"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      南投縣
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="ChanghuaCounty"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="ChanghuaCounty"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      彰化縣
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="YunlinCounty"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="YunlinCounty"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      雲林縣
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="Chiayi"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="Chiayi"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      嘉義市
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="ChiayiCounty"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="ChiayiCounty"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      嘉義縣
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="Tainan"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="Tainan"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      台南市
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="Kaohsiung"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="Kaohsiung"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      高雄市
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="PingtungCounty"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="PingtungCounty"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      屏東縣
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="TaitungCounty"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="TaitungCounty"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      台東縣
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="HualienCounty"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="HualienCounty"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      花蓮縣
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="YilanCounty"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="YilanCounty"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      宜蘭縣
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="PenghuCounty"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="PenghuCounty"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      澎湖縣
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="KinmenCounty"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="KinmenCounty"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      金門縣
+                    </label>
+                  </li>
+                  <li className="col">
+                    <input
+                      type="radio"
+                      name="city"
+                      id="LienchiangCounty"
+                      className="d-none"
+                    />
+                    <label
+                      htmlFor="LienchiangCounty"
+                      className="w-100 btn btn-radio btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) =>
+                        setCity({
+                          tw: e.target.innerText,
+                          en: e.target.htmlFor,
+                        })
+                      }
+                    >
+                      連江縣
+                    </label>
+                  </li>
+                  <li className="col flex-grow-1">
                     <button
                       type="button"
-                      className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                      className="w-100 btn btn-outline-primary shadow fs-lg-6 "
+                      onClick={() => setTogglePanel("default")}
                     >
-                      手動輸入
+                      設定
                     </button>
                   </li>
                 </ul>
+              ) : (
                 <ul className="list-unstyled row row-cols-5 g-3 mb-0">
-                  {/* 1 */}
+                  {/* more togglePanel */}
                   <li className="col">
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
                       onClick={(e) => setSearch(search + e.target.innerText)}
                     >
-                      紅
+                      F
                     </button>
                   </li>
                   <li className="col">
@@ -86,32 +776,34 @@ const Search = () => {
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
                       onClick={(e) => setSearch(search + e.target.innerText)}
                     >
-                      藍
+                      R
                     </button>
                   </li>
                   <li className="col">
                     <button
                       type="button"
-                      className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                      className="w-100 btn btn-outline-primary shadow fs-lg-6"
                       onClick={(e) => setSearch(search + e.target.innerText)}
                     >
-                      1
+                      T
                     </button>
                   </li>
                   <li className="col">
                     <button
                       type="button"
-                      className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                      className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) => setSearch(search + e.target.innerText)}
                     >
-                      2
+                      快
                     </button>
                   </li>
                   <li className="col">
                     <button
                       type="button"
-                      className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                      className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) => setSearch(search + e.target.innerText)}
                     >
-                      3
+                      內科
                     </button>
                   </li>
                   {/* 2 */}
@@ -119,40 +811,54 @@ const Search = () => {
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) => setSearch(search + e.target.innerText)}
                     >
-                      綠
+                      跳蛙
                     </button>
                   </li>
                   <li className="col">
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) => setSearch(search + e.target.innerText)}
                     >
-                      棕
+                      通勤
                     </button>
                   </li>
                   <li className="col">
                     <button
                       type="button"
-                      className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                      className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) => setSearch(search + e.target.innerText)}
                     >
-                      4
+                      南軟
                     </button>
                   </li>
                   <li className="col">
                     <button
                       type="button"
-                      className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                      className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) => setSearch(search + e.target.innerText)}
                     >
-                      5
+                      先導
                     </button>
                   </li>
                   <li className="col">
                     <button
                       type="button"
-                      className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
+                      className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) => setSearch(search + e.target.innerText)}
                     >
-                      6
+                      夜間
+                    </button>
+                  </li>
+                  <li className="col">
+                    <button
+                      type="button"
+                      className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) => setSearch(search + e.target.innerText)}
+                    >
+                      市民
                     </button>
                   </li>
                   {/* 3 */}
@@ -160,92 +866,31 @@ const Search = () => {
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                      onClick={(e) => setSearch(search + e.target.innerText)}
                     >
-                      綠
+                      其他
                     </button>
                   </li>
-                  <li className="col">
+                  <li className="col flex-grow-1">
                     <button
                       type="button"
-                      className="w-100 btn btn-outline-primary shadow fs-lg-6"
+                      className="w-100 btn btn-outline-primary shadow fs-lg-6 "
+                      onClick={() => setTogglePanel("default")}
                     >
-                      棕
-                    </button>
-                  </li>
-                  <li className="col">
-                    <button
-                      type="button"
-                      className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
-                    >
-                      4
-                    </button>
-                  </li>
-                  <li className="col">
-                    <button
-                      type="button"
-                      className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
-                    >
-                      5
-                    </button>
-                  </li>
-                  <li className="col">
-                    <button
-                      type="button"
-                      className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
-                    >
-                      6
-                    </button>
-                  </li>
-                  {/* 4 */}
-                  <li className="col">
-                    <button
-                      type="button"
-                      className="w-100 btn btn-outline-primary shadow fs-lg-6"
-                    >
-                      幹線
-                    </button>
-                  </li>
-                  <li className="col">
-                    <button
-                      type="button"
-                      className="w-100 btn btn-outline-primary shadow fs-lg-6"
-                    >
-                      更多
-                    </button>
-                  </li>
-                  <li className="col">
-                    <button
-                      type="button"
-                      className="w-100 btn btn-outline-primary shadow fs-lg-6"
-                      onClick={() => setSearch("")}
-                    >
-                      c
-                    </button>
-                  </li>
-                  <li className="col">
-                    <button
-                      type="button"
-                      className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
-                    >
-                      0
-                    </button>
-                  </li>
-                  <li className="col">
-                    <button
-                      type="button"
-                      className="w-100 h-100 btn btn-img btn-outline-primary shadow text-white"
-                    >
-                      <img src="icon/del.svg" alt="delete" />
+                      回上一頁
                     </button>
                   </li>
                 </ul>
-              </div>
+              )}
             </div>
           </div>
         </div>
+
         {/* 搜尋結果 */}
         <div className="mt-24 mt-sm-32 mt-lg-0 ms-lg-100 flex-grow-1">
-          <h1 className="fs-6 fs-lg-5 mb-2 pt-lg-7">請先選擇縣市</h1>
+          <h1 className="fs-6 fs-lg-5 mb-2 pt-lg-7">
+            {city.tw ? city.tw : "請先選擇縣市"}
+          </h1>
           <ul className="list-unstyled ">
             <li className="card bg-strip hover-bg-gray-light">
               <Link className="card-body d-flex justify-content-between align-items-center pe-2 ">

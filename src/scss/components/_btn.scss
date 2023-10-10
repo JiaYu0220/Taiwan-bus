@@ -11,3 +11,8 @@
   justify-content: center;
   align-items: center;
 }
+
+input[type="radio"]:checked + .btn-radio {
+  color: $dark;
+  background-color: $primary;
+}
