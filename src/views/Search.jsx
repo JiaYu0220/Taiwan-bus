@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,6 +6,9 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as farFaHeart } from "@fortawesome/free-regular-svg-icons";
+import axios from "axios";
+import jsSHA from "jssha";
+const { VITE_APP_SITE } = import.meta.env;
 
 const Search = () => {
   const [search, setSearch] = useState("");
@@ -14,6 +17,70 @@ const Search = () => {
     tw: "",
     en: "",
   });
+  const [busData, setBusData] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  // 搜尋縣市
+  const searchCity = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.get(
+        `${VITE_APP_SITE}/Route/City/${city.en}?%24orderby=RouteName%2FZh_tw&%24top=30&%24format=JSON`,
+        {
+          headers: getAuthorizationHeader(),
+        }
+      );
+      setIsLoading(false);
+      setBusData(data);
+    } catch (error) {
+      console.log("searchCity", error);
+    }
+  };
+
+  // input搜尋
+  useEffect(() => {
+    (async () => {
+      try {
+        setIsLoading(true);
+        const { data } = await axios.get(
+          `${VITE_APP_SITE}/Route/City/Taipei/${search}?%24orderby=RouteName%2FZh_tw&%24top=30&%24format=JSON`,
+          {
+            headers: getAuthorizationHeader(),
+          }
+        );
+        setIsLoading(false);
+        setBusData(data);
+      } catch (error) {
+        console.log("searchBus", error);
+      }
+    })();
+  }, [search]);
+  // 搜尋關鍵字
+
+  // API 認證
+  const getAuthorizationHeader = () => {
+    // 自己 ID、KEY
+    const AppID = "alice49885-93ea6fa2-b1be-42fa";
+    const AppKey = "1fc51d3d-3f92-4465-a54d-342641acee30";
+    // 拿到日期的 GMT String
+    let GMTString = new Date().toGMTString();
+    // 創建一個用於SHA-1雜湊的物件
+    let ShaObj = new jsSHA("SHA-1", "TEXT");
+    // 設置HMAC密鑰為AppKey
+    ShaObj.setHMACKey(AppKey, "TEXT");
+    // 更新HMAC的內容，包括"x-date"標頭和GMT時間字串
+    ShaObj.update("x-date: " + GMTString);
+    // 獲取HMAC的結果，以Base64編碼的字串形式
+    let HMAC = ShaObj.getHMAC("B64");
+    // 構建授權 header
+    let Authorization =
+      'hmac username="' +
+      AppID +
+      '", algorithm="hmac-sha1", headers="x-date", signature="' +
+      HMAC +
+      '"';
+    return { Authorization: Authorization, "X-Date": GMTString };
+  };
 
   return (
     <>
@@ -44,8 +111,11 @@ const Search = () => {
                   id="search"
                   placeholder="選擇路線或手動輸入關鍵字"
                   inputMode="none"
+                  disabled={!busData}
                   value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
                 />
               </div>
             </div>
@@ -70,7 +140,7 @@ const Search = () => {
                         <p>選擇縣市</p>
                       </button>
                     </li>
-                    {city ? (
+                    {busData ? (
                       <li className="d-lg-none flex-grow-1">
                         <button
                           type="button"
@@ -83,7 +153,7 @@ const Search = () => {
                       ""
                     )}
                   </ul>
-                  {city ? (
+                  {busData ? (
                     <ul className="list-unstyled row row-cols-5 g-3 mb-0">
                       {/* 1 */}
                       <li className="col">
@@ -752,7 +822,10 @@ const Search = () => {
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6 "
-                      onClick={() => setTogglePanel("default")}
+                      onClick={() => {
+                        setTogglePanel("default");
+                        searchCity();
+                      }}
                     >
                       設定
                     </button>
@@ -891,50 +964,52 @@ const Search = () => {
           <h1 className="fs-6 fs-lg-5 mb-2 pt-lg-7">
             {city.tw ? city.tw : "請先選擇縣市"}
           </h1>
-          <ul className="list-unstyled ">
-            <li className="card bg-strip hover-bg-gray-light">
-              <Link className="card-body d-flex justify-content-between align-items-center pe-2 ">
-                <div>
-                  <h2 className="card-title fs-5 fs-lg-4 fw-medium">紅10</h2>
-                  <p className="fs-7 fs-lg-6 text-primary">
-                    <span className="text-light">台北海大</span> 往{" "}
-                    <span className="text-light">捷運劍潭站</span>
-                  </p>
-                </div>
-                <button type="button" className="btn btn-link hover-scale">
-                  <FontAwesomeIcon className="fs-5" icon={farFaHeart} />
-                </button>
-              </Link>
-            </li>
-            <li className="card bg-strip hover-bg-gray-light">
-              <Link className="card-body d-flex justify-content-between align-items-center pe-2 ">
-                <div>
-                  <h2 className="card-title fs-5 fs-lg-4 fw-medium">紅10</h2>
-                  <p className="fs-7 fs-lg-6 text-primary">
-                    <span className="text-light">台北海大</span> 往{" "}
-                    <span className="text-light">捷運劍潭站</span>
-                  </p>
-                </div>
-                <button type="button" className="btn btn-link hover-scale">
-                  <FontAwesomeIcon className="fs-5" icon={farFaHeart} />
-                </button>
-              </Link>
-            </li>
-            <li className="card bg-strip hover-bg-gray-light">
-              <Link className="card-body d-flex justify-content-between align-items-center pe-2 ">
-                <div>
-                  <h2 className="card-title fs-5 fs-lg-4 fw-medium">紅10</h2>
-                  <p className="fs-7 fs-lg-6 text-primary">
-                    <span className="text-light">台北海大</span> 往{" "}
-                    <span className="text-light">捷運劍潭站</span>
-                  </p>
-                </div>
-                <button type="button" className="btn btn-link hover-scale">
-                  <FontAwesomeIcon className="fs-5" icon={farFaHeart} />
-                </button>
-              </Link>
-            </li>
-          </ul>
+          {isLoading ? (
+            <div className="d-flex justify-content-center">
+              <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+          {busData ? (
+            <ul className="list-unstyled ">
+              {busData.map((item) => {
+                return (
+                  <li
+                    className="card bg-strip hover-bg-gray-light"
+                    key={item.RouteUID}
+                  >
+                    <Link className="card-body d-flex justify-content-between align-items-center pe-2 ">
+                      <div>
+                        <h2 className="card-title fs-5 fs-lg-4 fw-medium">
+                          {item.RouteName.Zh_tw}
+                        </h2>
+                        <p className="fs-7 fs-lg-6 text-primary">
+                          <span className="text-light">
+                            {item.DepartureStopNameZh}
+                          </span>{" "}
+                          往{" "}
+                          <span className="text-light">
+                            {item.DestinationStopNameZh}
+                          </span>
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        className="btn btn-link hover-scale"
+                      >
+                        <FontAwesomeIcon className="fs-5" icon={farFaHeart} />
+                      </button>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </>
