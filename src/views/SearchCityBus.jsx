@@ -10,7 +10,7 @@ import axios from "axios";
 import jsSHA from "jssha";
 const { VITE_APP_SITE } = import.meta.env;
 
-const Search = () => {
+const SearchCityBus = () => {
   const [searchInput, setSearchInput] = useState("");
   const [togglePanel, setTogglePanel] = useState("default");
   const [city, setCity] = useState({
@@ -51,7 +51,7 @@ const Search = () => {
         setIsLoading(false);
         setBusData(data);
       } catch (error) {
-        console.log("searchBus", error);
+        console.log("searchCityBus", error);
       }
     })();
   }, [searchInput]);
@@ -1042,4 +1042,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchCityBus;
