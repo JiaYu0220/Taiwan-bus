@@ -11,7 +11,7 @@ import jsSHA from "jssha";
 const { VITE_APP_SITE } = import.meta.env;
 
 const Search = () => {
-  const [search, setSearch] = useState("");
+  const [searchInput, setSearchInput] = useState("");
   const [togglePanel, setTogglePanel] = useState("default");
   const [city, setCity] = useState({
     tw: "",
@@ -43,7 +43,7 @@ const Search = () => {
       try {
         setIsLoading(true);
         const { data } = await axios.get(
-          `${VITE_APP_SITE}/Route/City/Taipei/${search}?%24orderby=RouteName%2FZh_tw&%24top=30&%24format=JSON`,
+          `${VITE_APP_SITE}/Route/City/Taipei/${searchInput}?%24orderby=RouteName%2FZh_tw&%24top=30&%24format=JSON`,
           {
             headers: getAuthorizationHeader(),
           }
@@ -54,7 +54,7 @@ const Search = () => {
         console.log("searchBus", error);
       }
     })();
-  }, [search]);
+  }, [searchInput]);
   // 搜尋關鍵字
 
   // API 認證
@@ -114,7 +114,7 @@ const Search = () => {
                   disabled={!busData}
                   value={search}
                   onChange={(e) => {
-                    setSearch(e.target.value);
+                    setSearchInput(e.target.value);
                   }}
                 />
               </div>
@@ -161,7 +161,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           紅
@@ -172,7 +172,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           藍
@@ -183,7 +183,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           1
@@ -194,7 +194,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           2
@@ -205,7 +205,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           3
@@ -217,7 +217,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           綠
@@ -228,7 +228,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           棕
@@ -239,7 +239,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           4
@@ -250,7 +250,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           5
@@ -261,7 +261,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           6
@@ -273,7 +273,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           橘
@@ -284,7 +284,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           小
@@ -295,7 +295,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           7
@@ -306,7 +306,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           8
@@ -317,7 +317,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           9
@@ -355,7 +355,7 @@ const Search = () => {
                           type="button"
                           className="w-100 btn btn-outline-primary shadow text-white fs-lg-6"
                           onClick={(e) =>
-                            setSearch(search + e.target.innerText)
+                            setSearchInput(searchInput + e.target.innerText)
                           }
                         >
                           0
@@ -365,7 +365,9 @@ const Search = () => {
                         <button
                           type="button"
                           className="w-100 h-100 btn btn-img btn-outline-primary shadow text-white"
-                          onClick={() => setSearch(search.slice(0, -1))}
+                          onClick={() =>
+                            setSearchInput(searchInput.slice(0, -1))
+                          }
                         >
                           <img src="icon/del.svg" alt="delete" />
                         </button>
@@ -838,7 +840,9 @@ const Search = () => {
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
-                      onClick={(e) => setSearch(search + e.target.innerText)}
+                      onClick={(e) =>
+                        setSearchInput(searchInput + e.target.innerText)
+                      }
                     >
                       F
                     </button>
@@ -847,7 +851,9 @@ const Search = () => {
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
-                      onClick={(e) => setSearch(search + e.target.innerText)}
+                      onClick={(e) =>
+                        setSearchInput(searchInput + e.target.innerText)
+                      }
                     >
                       R
                     </button>
@@ -856,7 +862,9 @@ const Search = () => {
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
-                      onClick={(e) => setSearch(search + e.target.innerText)}
+                      onClick={(e) =>
+                        setSearchInput(searchInput + e.target.innerText)
+                      }
                     >
                       T
                     </button>
@@ -865,7 +873,9 @@ const Search = () => {
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
-                      onClick={(e) => setSearch(search + e.target.innerText)}
+                      onClick={(e) =>
+                        setSearchInput(searchInput + e.target.innerText)
+                      }
                     >
                       快
                     </button>
@@ -874,7 +884,9 @@ const Search = () => {
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
-                      onClick={(e) => setSearch(search + e.target.innerText)}
+                      onClick={(e) =>
+                        setSearchInput(searchInput + e.target.innerText)
+                      }
                     >
                       內科
                     </button>
@@ -884,7 +896,9 @@ const Search = () => {
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
-                      onClick={(e) => setSearch(search + e.target.innerText)}
+                      onClick={(e) =>
+                        setSearchInput(searchInput + e.target.innerText)
+                      }
                     >
                       跳蛙
                     </button>
@@ -893,7 +907,9 @@ const Search = () => {
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
-                      onClick={(e) => setSearch(search + e.target.innerText)}
+                      onClick={(e) =>
+                        setSearchInput(searchInput + e.target.innerText)
+                      }
                     >
                       通勤
                     </button>
@@ -902,7 +918,9 @@ const Search = () => {
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
-                      onClick={(e) => setSearch(search + e.target.innerText)}
+                      onClick={(e) =>
+                        setSearchInput(searchInput + e.target.innerText)
+                      }
                     >
                       南軟
                     </button>
@@ -911,7 +929,9 @@ const Search = () => {
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
-                      onClick={(e) => setSearch(search + e.target.innerText)}
+                      onClick={(e) =>
+                        setSearchInput(searchInput + e.target.innerText)
+                      }
                     >
                       先導
                     </button>
@@ -920,7 +940,9 @@ const Search = () => {
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
-                      onClick={(e) => setSearch(search + e.target.innerText)}
+                      onClick={(e) =>
+                        setSearchInput(searchInput + e.target.innerText)
+                      }
                     >
                       夜間
                     </button>
@@ -929,7 +951,9 @@ const Search = () => {
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
-                      onClick={(e) => setSearch(search + e.target.innerText)}
+                      onClick={(e) =>
+                        setSearchInput(searchInput + e.target.innerText)
+                      }
                     >
                       市民
                     </button>
@@ -939,7 +963,9 @@ const Search = () => {
                     <button
                       type="button"
                       className="w-100 btn btn-outline-primary shadow fs-lg-6"
-                      onClick={(e) => setSearch(search + e.target.innerText)}
+                      onClick={(e) =>
+                        setSearchInput(searchInput + e.target.innerText)
+                      }
                     >
                       其他
                     </button>
