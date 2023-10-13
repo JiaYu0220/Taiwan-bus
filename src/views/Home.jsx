@@ -54,7 +54,7 @@ const Home = () => {
             <li className="nav-circle nav-circle-white">
               <NavLink
                 className="h-100 d-flex flex-column justify-content-center align-items-center text-dark me-4 m-sm-0"
-                to="/Search"
+                to="/SearchCityBus"
               >
                 <FontAwesomeIcon
                   className="fs-5 fs-sm-1 fs-lg-3 mb-2 mb-sm-1"
@@ -67,7 +67,7 @@ const Home = () => {
             <li className="nav-circle nav-circle-warning">
               <NavLink
                 className="h-100 w-100 d-flex flex-column justify-content-center align-items-center text-dark ps-7 pb-1 ps-sm-3 pb-sm-2 p-lg-0 "
-                to="/Search"
+                to="/SearchCityBus"
               >
                 <FontAwesomeIcon
                   className="fs-5 fs-sm-1 fs-lg-3 mb-2 mb-sm-1"
