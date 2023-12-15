@@ -574,7 +574,7 @@ $border-widths: (
   5: 5px,
 ) !default;
 $border-style: solid !default;
-$border-color: $gray-300 !default;
+$border-color: $gray-300 !default; //custom
 $border-color-translucent: rgba($black, 0.175) !default;
 // scss-docs-end border-variables
 
@@ -1597,12 +1597,12 @@ $toast-header-border-color: $toast-border-color !default;
 // Badges
 
 // scss-docs-start badge-variables
-$badge-font-size: 0.75em !default;
-$badge-font-weight: $font-weight-bold !default;
+$badge-font-size: 1em !default; //custom //0.75em
+$badge-font-weight: $font-weight-base !default; //custom //$font-weight-bold
 $badge-color: $white !default;
-$badge-padding-y: 0.35em !default;
-$badge-padding-x: 0.65em !default;
-$badge-border-radius: var(--#{$prefix}border-radius) !default;
+$badge-padding-y: 12px !default; //custom //0.35em
+$badge-padding-x: 10px !default; //custom //0.65em
+$badge-border-radius: 12px !default; //custom //var(--#{$prefix}border-radius)
 // scss-docs-end badge-variables
 
 // Modals

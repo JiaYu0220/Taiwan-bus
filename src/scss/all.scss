@@ -9,7 +9,8 @@
 
 @import "bootstrap/scss/bootstrap.scss";
 
-@import "pages/index.scss";
+@import "../pages/Home/index";
+@import "../pages/BusInfo/BusInfo";
 
 @import "components/btn.scss";
 @import "utils/helpers.scss";

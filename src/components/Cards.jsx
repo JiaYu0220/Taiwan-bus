@@ -5,10 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as fasFaHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as farFaHeart } from "@fortawesome/free-regular-svg-icons";
 
-const CardListLink = ({ title, text, to }) => {
+const CardListLink = ({ title, text, to, onClick }) => {
   return (
     <li className="card bg-strip hover-bg-gray-light">
-      <Link className="card-body d-flex justify-content-between align-items-center pe-2">
+      <Link
+        to={to}
+        onClick={onClick}
+        className="card-body d-flex justify-content-between align-items-center pe-2"
+      >
         <div>
           <h2 className="card-title fs-5 fs-lg-4 fw-medium">{title}</h2>
           <p className="fs-7 fs-lg-6 text-light">{text}</p>

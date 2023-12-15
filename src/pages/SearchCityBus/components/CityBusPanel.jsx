@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { BtnTextPrimary, BtnTextLight, BtnRadio } from "./Buttons";
+import {
+  BtnTextPrimary,
+  BtnTextLight,
+  BtnRadio,
+} from "../../../components/Buttons";
 import axios from "axios";
-import jsSHA from "jssha";
+import {
+  getTdxToken,
+  getCookies,
+} from "../../../global/getAuthorizationHeader";
 const { VITE_APP_SITE } = import.meta.env;
 
 const CityBusPanel = ({
@@ -11,10 +18,8 @@ const CityBusPanel = ({
   setSearchInput,
   city,
   setCity,
-  busData,
   setBusData,
   setIsLoading,
-  getAuthorizationHeader,
 }) => {
   const [togglePanel, setTogglePanel] = useState("city");
 
@@ -80,23 +85,86 @@ const CityBusPanel = ({
     ],
   };
 
-  // api 搜尋縣市
   const searchCity = async () => {
     try {
-      console.log(busData);
       setIsLoading(true);
+      let tdxToken = getCookies("tdxToken");
+
+      if (!tdxToken) {
+        await getTdxToken();
+        tdxToken = getCookies("tdxToken"); // 如果Token不存在，或已过期，重新获取Token
+        console.log("get NewToken");
+      }
       const { data } = await axios.get(
         `${VITE_APP_SITE}/Route/City/${city.en}?%24orderby=RouteName%2FZh_tw&%24top=30&%24format=JSON`,
         {
-          headers: getAuthorizationHeader(),
+          headers: {
+            Authorization: `Bearer ${tdxToken}`,
+            "Content-Encoding": "br,gzip", //呼叫歷史資料類型API時，使用此設定將可大幅降低資料傳輸時間
+          },
         }
       );
+
+      setIsLoading(false);
+      // 去除重複
+      // const uniqueData = data.filter((item, index, array) => {
+      //   return array.findIndex((t) => t.RouteUID === item.RouteUID) === index;
+      // });
+
+      //有一樣的 RouteName 時，要特別標出來，因為卡片標題需特別新增補充名稱，如基隆
+      data.forEach((item, index, array) => {
+        console.log(array[index + 1]);
+        if (
+          array[index + 1] &&
+          item.RouteName.Zh_tw === array[index + 1].RouteName.Zh_tw
+        ) {
+          item.isSameName = true;
+          array[index + 1].isSameName = true;
+        } else if (!item.isSameName) {
+          item.isSameName = false;
+        }
+      });
+      console.log(data);
+
+      setBusData(data);
+    } catch (error) {
+      console.log("searchCityBus", error);
+    }
+  };
+
+  const getBusData = async () => {
+    try {
+      setIsLoading(true);
+      let tdxToken = getCookies("tdxToken");
+
+      if (!tdxToken) {
+        await getTdxToken();
+        tdxToken = getCookies("tdxToken"); // 更新Token
+        console.log("get NewToken");
+      }
+      const { data } = await axios.get(
+        `${VITE_APP_SITE}/Route/City/${city.en}/${searchInput}?%24orderby=RouteName%2FZh_tw&%24top=30&%24format=JSON`,
+        {
+          headers: {
+            Authorization: `Bearer ${tdxToken}`,
+            "Content-Encoding": "br,gzip", //呼叫歷史資料類型API時，使用此設定將可大幅降低資料傳輸時間
+          },
+        }
+      );
+
       setIsLoading(false);
       setBusData(data);
     } catch (error) {
-      console.log("searchCity", error);
+      console.log("searchCityBus", error);
     }
   };
+
+  // input搜尋
+  useEffect(() => {
+    if (searchInput) {
+      getBusData();
+    }
+  }, [searchInput]);
 
   // btn onClick
   const handlePanelBtn = (e) => {
