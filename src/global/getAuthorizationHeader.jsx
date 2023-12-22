@@ -56,9 +56,21 @@ async function getTdxToken() {
     if (!document.cookie.includes(`tdxToken=${access_token}`)) {
       console.error("Failed to set the cookie");
     }
-  } catch (error) {}
-  // 在這裡處理錯誤回應的邏輯
-  console.error(error);
+  } catch (error) {
+    // 在這裡處理錯誤回應的邏輯
+    console.error(error);
+  }
 }
 
-export { getTdxToken, getCookies };
+async function getCookieToken() {
+  let tdxToken = getCookies("tdxToken");
+
+  if (!tdxToken) {
+    await getTdxToken();
+    tdxToken = getCookies("tdxToken"); // 更新token
+    console.log("get NewToken");
+  }
+  return tdxToken;
+}
+
+export { getTdxToken, getCookies, getCookieToken };

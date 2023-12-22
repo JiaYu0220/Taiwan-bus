@@ -10,6 +10,7 @@ import axios from "axios";
 import {
   getTdxToken,
   getCookies,
+  getCookieToken,
 } from "../../../global/getAuthorizationHeader";
 const { VITE_APP_SITE } = import.meta.env;
 
@@ -88,13 +89,8 @@ const CityBusPanel = ({
   const searchCity = async () => {
     try {
       setIsLoading(true);
-      let tdxToken = getCookies("tdxToken");
-
-      if (!tdxToken) {
-        await getTdxToken();
-        tdxToken = getCookies("tdxToken"); // 如果Token不存在，或已过期，重新获取Token
-        console.log("get NewToken");
-      }
+      // 取得存在 cookies 的 token
+      let tdxToken = await getCookieToken();
       const { data } = await axios.get(
         `${VITE_APP_SITE}/Route/City/${city.en}?%24orderby=RouteName%2FZh_tw&%24top=30&%24format=JSON`,
         {
@@ -135,13 +131,8 @@ const CityBusPanel = ({
   const getBusData = async () => {
     try {
       setIsLoading(true);
-      let tdxToken = getCookies("tdxToken");
-
-      if (!tdxToken) {
-        await getTdxToken();
-        tdxToken = getCookies("tdxToken"); // 更新Token
-        console.log("get NewToken");
-      }
+      // 取得存在 cookies 的 token
+      let tdxToken = await getCookieToken();
       const { data } = await axios.get(
         `${VITE_APP_SITE}/Route/City/${city.en}/${searchInput}?%24orderby=RouteName%2FZh_tw&%24top=30&%24format=JSON`,
         {

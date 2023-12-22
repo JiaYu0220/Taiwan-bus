@@ -29,3 +29,25 @@ li:last-child .dot::after {
   background: $primary;
   box-shadow: (0px 0px 2px $primary), (0px 0px 6px $primary);
 }
+
+.leaflet-dark {
+  .leaflet-layer,
+  .leaflet-control-zoom-in,
+  .leaflet-control-zoom-out,
+  .leaflet-control-attribution {
+    filter: invert(100%) hue-rotate(180deg) brightness(80%) grayscale(80%);
+  }
+}
+
+.circleMarker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background: #000;
+  border: 2px solid $primary;
+  border-radius: 50%;
+  color: $primary;
+  box-shadow: 0px 0px 2px 0px $primary, 0px 0px 6px 0px $primary;
+}

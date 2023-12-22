@@ -24,6 +24,8 @@ const CityBusSearchResult = ({ busData, isLoading, city }) => {
                       forth: item.DestinationStopNameZh,
                     };
                     storedItem("select", select);
+                    // 往返方向，預設為 0
+                    storedItem("direction", 0);
                   }}
                   title={
                     item.isSameName

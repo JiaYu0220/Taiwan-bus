@@ -3,6 +3,8 @@ import Home from "./pages/Home";
 import SearchCityBus from "./pages/SearchCityBus";
 import BusInfo from "./pages/BusInfo";
 import { useState } from "react";
+import BusArrivalTime from "./pages/BusInfo/components/BusArrivalTime";
+import BusArrivalMap from "./pages/BusInfo/components/BusArrivalMap";
 
 function App() {
   const [city, setCity] = useState({
@@ -20,7 +22,10 @@ function App() {
       <Route
         path="/BusInfo"
         element={<BusInfo city={city} setCity={setCity} />}
-      />
+      >
+        <Route index element={<BusArrivalTime />} />
+        <Route path="BusArrivalMap" element={<BusArrivalMap />} />
+      </Route>
     </Routes>
   );
 }
