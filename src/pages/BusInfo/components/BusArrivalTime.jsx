@@ -1,8 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWheelchair } from "@fortawesome/free-solid-svg-icons";
-import { Badge, Col, Container, Row } from "react-bootstrap";
-import { useOutletContext, useParams } from "react-router-dom";
+import { Badge, Col, Container, Row, Spinner } from "react-bootstrap";
+import { useOutletContext } from "react-router-dom";
 
 // 1:06:00
 const BusArrivalTime = () => {
@@ -24,7 +24,7 @@ const BusArrivalTime = () => {
                         className="d-flex justify-content-between align-items-center"
                       >
                         <p className="text-primary">
-                          {stop.EstimateTime > 0 && stop.EstimateTime < 60 ? (
+                          {stop.EstimateTime >= 0 && stop.EstimateTime < 60 ? (
                             <Badge
                               bg="primary"
                               text="dark"
@@ -100,7 +100,11 @@ const BusArrivalTime = () => {
                     );
                   })
                 ) : (
-                  <p className="text-primary">沒有可用的數據</p>
+                  <Spinner
+                    className="mx-auto"
+                    animation="border"
+                    variant="primary"
+                  />
                 )}
               </ul>
             </Col>

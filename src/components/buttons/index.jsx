@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 //元件內的文字可用 children 導入
@@ -65,11 +65,21 @@ const BtnIcon = ({ onClick, icon, className }) => {
   );
 };
 
-const LinkIcon = ({ to, icon }) => {
+const LinkIcon = ({ to, icon, className }) => {
+  const defaultClassName = "text-light hover-scale";
+  const finalClassName = className
+    ? `${defaultClassName} ${className}`
+    : defaultClassName;
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate(to);
+  }
+
   return (
-    <Link to={to} className="text-light hover-scale">
+    <Button variant="link" onClick={handleClick} className={finalClassName}>
       <FontAwesomeIcon className="fs-5" icon={icon} />
-    </Link>
+    </Button>
   );
 };
 

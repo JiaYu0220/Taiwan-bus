@@ -1,8 +1,7 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWheelchair } from "@fortawesome/free-solid-svg-icons";
 import {
-  LayerGroup,
   MapContainer,
   Marker,
   Polyline,
@@ -11,7 +10,6 @@ import {
   useMap,
 } from "react-leaflet";
 import { useOutletContext } from "react-router-dom";
-import { useLeafletContext } from "@react-leaflet/core";
 
 // 沒用 memo 會造成每秒都執行 setView()，因為父元件的狀態被改變了，雖然 props 的結果沒有變，子元件仍會被重新渲染
 const MapCenter = React.memo(({ center }) => {
@@ -21,6 +19,7 @@ const MapCenter = React.memo(({ center }) => {
   return null;
 });
 
+// 站牌
 const StopsMarker = React.memo(({ stops, direction }) => {
   function makeCircleIcon(num) {
     return L.divIcon({
@@ -29,7 +28,6 @@ const StopsMarker = React.memo(({ stops, direction }) => {
       iconSize: [30, 30],
     });
   }
-  console.log("StopsMarker154");
 
   return (
     <>
@@ -50,49 +48,44 @@ const StopsMarker = React.memo(({ stops, direction }) => {
   );
 });
 
-const BusMarker = ({ stops, direction }) => {
-  const context = useLeafletContext();
+const BusMarker = React.memo(({ stops, direction }) => {
   const busIcon = new L.Icon({
     iconUrl: "../../../../busIcon.svg",
     iconSize: [40, 40],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
   });
-
-  useMemo(() => {
-    // 清除现有的 图层
-    const { layerContainer } = context;
-    layerContainer.clearLayers();
-
-    if (stops?.[direction]?.Stops) {
-      stops[direction].Stops.filter((item) => item.BusPosition).forEach(
-        (item) => {
-          console.log(item);
-          L.marker(
-            [item.BusPosition.PositionLat, item.BusPosition.PositionLon],
-            { icon: busIcon }
+  return (
+    <>
+      {stops?.[direction]?.Stops &&
+        stops[direction].Stops.filter((item) => item.PlateNumb).map(
+          (item, index) => (
+            <Marker
+              key={index}
+              icon={busIcon}
+              position={[
+                item.BusPosition.PositionLat,
+                item.BusPosition.PositionLon,
+              ]}
+            >
+              <Popup>
+                {item.StopName.Zh_tw}
+                <p className="text-primary">
+                  <FontAwesomeIcon
+                    className={`fs-4 me-1 ${
+                      !item.HasLiftOrRamp ? `d-none` : ``
+                    }`}
+                    icon={faWheelchair}
+                  ></FontAwesomeIcon>
+                  {item.PlateNumb}
+                </p>
+              </Popup>
+            </Marker>
           )
-            .addTo(layerContainer) // 加入到圖層 layerContainer
-            .bindPopup(
-              // 加入視窗訊息
-              `<div>
-              目前在 ${item.StopName.Zh_tw}
-              <p class="text-primary">
-                <FontAwesomeIcon
-                  class="fs-4 me-1 ${!item.HasLiftOrRamp ? "d-none" : ""}"
-                  icon={faWheelchair}
-                />
-                ${item.PlateNumb}
-              </p>
-            </div>`
-            );
-        }
-      );
-    }
-  }, [stops]);
-
-  return null;
-};
+        )}
+    </>
+  );
+});
 
 const BusArrivalMap = () => {
   const [direction, stops, sec] = useOutletContext();
@@ -102,6 +95,12 @@ const BusArrivalMap = () => {
   const isFirstUpdate = useRef(true);
   // 線
   const [polyline, setPolyline] = useState([]);
+
+  // 更換方向時要重新渲染線和中心點
+  useEffect(() => {
+    isFirstUpdate.current = true;
+  }, [direction]);
+
   useEffect(() => {
     if (stops?.[direction]?.Stops && isFirstUpdate.current) {
       const stopPositionArray = stops[direction].Stops.map((item) => [
@@ -116,7 +115,7 @@ const BusArrivalMap = () => {
       // 只有第一次 stops 要算中心點和渲染線
       isFirstUpdate.current = false;
     }
-  }, [stops]);
+  }, [stops, direction]);
 
   // 算出中心點
   function getCenterPosition(array) {
@@ -148,10 +147,7 @@ const BusArrivalMap = () => {
 
         <MapCenter center={center} />
         <StopsMarker stops={stops} direction={direction} />
-        <LayerGroup>
-          <BusMarker stops={stops} direction={direction} />
-        </LayerGroup>
-
+        <BusMarker stops={stops} direction={direction} />
         {polyline.length > 0 && (
           <Polyline pathOptions={{ color: `#1CC8EE` }} positions={polyline} />
         )}

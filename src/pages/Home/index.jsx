@@ -42,7 +42,7 @@ const Home = () => {
             <li className="nav-circle nav-circle-primary">
               <NavLink
                 className="h-100 d-flex flex-column justify-content-center align-items-center text-light pe-1 pb-3 p-sm-0 "
-                to=""
+                to="/NearbyBus"
               >
                 <FontAwesomeIcon
                   className="fs-5 fs-sm-1 fs-lg-3 mb-2 mb-sm-1"

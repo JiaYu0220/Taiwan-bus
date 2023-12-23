@@ -5,6 +5,7 @@ import BusInfo from "./pages/BusInfo";
 import { useState } from "react";
 import BusArrivalTime from "./pages/BusInfo/components/BusArrivalTime";
 import BusArrivalMap from "./pages/BusInfo/components/BusArrivalMap";
+import NearbyBus from "./pages/NearbyBus";
 
 function App() {
   const [city, setCity] = useState({
@@ -26,6 +27,7 @@ function App() {
         <Route index element={<BusArrivalTime />} />
         <Route path="BusArrivalMap" element={<BusArrivalMap />} />
       </Route>
+      <Route path="/NearbyBus" element={<NearbyBus />} />
     </Routes>
   );
 }
