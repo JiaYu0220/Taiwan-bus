@@ -52,14 +52,14 @@ const BtnRadio = ({ onClick, name, id, htmlFor, children, className }) => {
   );
 };
 
-const BtnIcon = ({ onClick, icon, className }) => {
-  const defaultClassName = "btn-link hover-scale";
+const BtnIcon = ({ onClick, icon, className, variant }) => {
+  const defaultClassName = "hover-scale";
   const finalClassName = className
     ? `${defaultClassName} ${className}`
     : defaultClassName;
 
   return (
-    <Button className={finalClassName} onClick={onClick}>
+    <Button className={finalClassName} onClick={onClick} variant="link">
       <FontAwesomeIcon className="fs-5" icon={icon} />
     </Button>
   );

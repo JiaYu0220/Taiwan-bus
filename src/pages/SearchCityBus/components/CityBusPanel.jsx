@@ -6,13 +6,7 @@ import {
   BtnTextLight,
   BtnRadio,
 } from "../../../components/Buttons";
-import axios from "axios";
-import {
-  getTdxToken,
-  getCookies,
-  getCookieToken,
-} from "../../../global/getAuthorizationHeader";
-const { VITE_APP_SITE } = import.meta.env;
+import { getBusData, getCityAllBus } from "../../../global/api";
 
 const CityBusPanel = ({
   searchInput,
@@ -86,78 +80,7 @@ const CityBusPanel = ({
     ],
   };
 
-  const searchCity = async () => {
-    try {
-      setIsLoading(true);
-      // 取得存在 cookies 的 token
-      let tdxToken = await getCookieToken();
-      const { data } = await axios.get(
-        `${VITE_APP_SITE}/Route/City/${city.en}?%24orderby=RouteName%2FZh_tw&%24top=30&%24format=JSON`,
-        {
-          headers: {
-            Authorization: `Bearer ${tdxToken}`,
-            "Content-Encoding": "br,gzip", //呼叫歷史資料類型API時，使用此設定將可大幅降低資料傳輸時間
-          },
-        }
-      );
-
-      setIsLoading(false);
-      // 去除重複
-      // const uniqueData = data.filter((item, index, array) => {
-      //   return array.findIndex((t) => t.RouteUID === item.RouteUID) === index;
-      // });
-
-      //有一樣的 RouteName 時，要特別標出來，因為卡片標題需特別新增補充名稱，如基隆
-      data.forEach((item, index, array) => {
-        console.log(array[index + 1]);
-        if (
-          array[index + 1] &&
-          item.RouteName.Zh_tw === array[index + 1].RouteName.Zh_tw
-        ) {
-          item.isSameName = true;
-          array[index + 1].isSameName = true;
-        } else if (!item.isSameName) {
-          item.isSameName = false;
-        }
-      });
-      console.log(data);
-
-      setBusData(data);
-    } catch (error) {
-      console.log("searchCityBus", error);
-    }
-  };
-
-  const getBusData = async () => {
-    try {
-      setIsLoading(true);
-      // 取得存在 cookies 的 token
-      let tdxToken = await getCookieToken();
-      const { data } = await axios.get(
-        `${VITE_APP_SITE}/Route/City/${city.en}/${searchInput}?%24orderby=RouteName%2FZh_tw&%24top=30&%24format=JSON`,
-        {
-          headers: {
-            Authorization: `Bearer ${tdxToken}`,
-            "Content-Encoding": "br,gzip", //呼叫歷史資料類型API時，使用此設定將可大幅降低資料傳輸時間
-          },
-        }
-      );
-
-      setIsLoading(false);
-      setBusData(data);
-    } catch (error) {
-      console.log("searchCityBus", error);
-    }
-  };
-
-  // input搜尋
-  useEffect(() => {
-    if (searchInput) {
-      getBusData();
-    }
-  }, [searchInput]);
-
-  // btn onClick
+  // 鍵盤按鍵事件
   const handlePanelBtn = (e) => {
     const { innerText } = e.target;
     if (innerText === "更多") {
@@ -170,6 +93,27 @@ const CityBusPanel = ({
       setSearchInput(innerText);
     }
   };
+
+  // input搜尋
+  useEffect(() => {
+    if (searchInput) {
+      handleSearch();
+    }
+  }, [searchInput]);
+
+  async function handleCityConfirm() {
+    setIsLoading(true);
+    setTogglePanel("base");
+    const cityData = await getCityAllBus(city.en);
+    setBusData(cityData);
+    setIsLoading(false);
+  }
+  async function handleSearch() {
+    setIsLoading(true);
+    const searchBus = await getBusData(city.en, searchInput);
+    setBusData(searchBus);
+    setIsLoading(false);
+  }
 
   return (
     <div className="position-fixed bottom-0 start-0 bottom-lg-initial start-lg-initial mt-lg-24 z-2">
@@ -198,14 +142,7 @@ const CityBusPanel = ({
             })}
             {/* city 確認 */}
             <li className="col flex-grow-1">
-              <BtnTextPrimary
-                onClick={() => {
-                  setTogglePanel("base");
-                  searchCity();
-                }}
-              >
-                設定
-              </BtnTextPrimary>
+              <BtnTextPrimary onClick={handleCityConfirm}>設定</BtnTextPrimary>
             </li>
           </ul>
         ) : togglePanel === "base" ? (

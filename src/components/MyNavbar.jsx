@@ -21,12 +21,13 @@ const MyNavbar = () => {
       </Col>
       <Col className="text-end">
         <LinkIcon
-          className={
-            location.pathname === "/BusInfo/BusArrivalMap" ? "d-none" : ""
-          }
+          className={location.pathname === "/BusInfo" ? "" : "d-none"}
           icon={faMapLocationDot}
           to={"BusArrivalMap"}
         />
+        <p className={location.pathname === "/NearbyBus" ? "" : "d-none"}>
+          我的附近
+        </p>
       </Col>
     </Row>
   );

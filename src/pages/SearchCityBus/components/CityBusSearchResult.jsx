@@ -1,9 +1,10 @@
 import React from "react";
 import Loading from "../../../components/Loading";
-import CardListLink from "../../../components/Cards";
+import { CardWithHeart } from "../../../components/Cards";
 import { storedItem } from "../../../global/storage";
 
 const CityBusSearchResult = ({ busData, isLoading, city }) => {
+  function handleClickCard() {}
   return (
     <>
       {busData ? (
@@ -12,20 +13,15 @@ const CityBusSearchResult = ({ busData, isLoading, city }) => {
           <ul className="list-unstyled">
             {busData.map((item) => {
               return (
-                <CardListLink
+                <CardWithHeart
                   key={item.RouteUID}
                   to={`/BusInfo`}
-                  onClick={() => {
-                    let select = {
-                      city,
-                      routeUID: item.RouteUID,
-                      routeName: item.RouteName.Zh_tw,
-                      back: item.DepartureStopNameZh,
-                      forth: item.DestinationStopNameZh,
-                    };
-                    storedItem("select", select);
-                    // 往返方向，預設為 0
-                    storedItem("direction", 0);
+                  select={{
+                    city,
+                    routeUID: item.RouteUID,
+                    routeName: item.RouteName.Zh_tw,
+                    back: item.DepartureStopNameZh,
+                    forth: item.DestinationStopNameZh,
                   }}
                   title={
                     item.isSameName

@@ -1,37 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart as fasFaHeart,
-  faLocationDot,
   faHeartCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as farFaHeart } from "@fortawesome/free-regular-svg-icons";
-import axios from "axios";
 import CityBusPanel from "./components/CityBusPanel";
 import BackHome from "../../components/BackHome";
-import Loading from "../../components/Loading";
 import SearchBar from "../../components/Inputs";
-import CardListLink from "../../components/Cards";
 import CityBusSearchResult from "./components/CityBusSearchResult";
-import { BtnIcon, BtnTextLight } from "../../components/Buttons";
-const { VITE_APP_SITE } = import.meta.env;
+import { BtnIcon } from "../../components/Buttons";
 
 const SearchCityBus = ({ city, setCity }) => {
   const [busData, setBusData] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-
-  // let getDataTimes = 1;
-  // let top = 30 * getDataTimes;
-  // let skip = top - 30;
-  // window.addEventListener("scroll", function () {
-  //   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-  //     getDataTimes++;
-  //     getBusData(top, skip);
-  //     console.log("已滚动到页面底部");
-  //   }
-  // });
+  // 初始化 city
+  useEffect(() => {
+    setCity({
+      tw: "",
+      en: "",
+    });
+  }, []);
 
   return (
     <>
