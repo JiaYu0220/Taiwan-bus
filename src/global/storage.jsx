@@ -7,6 +7,14 @@ function getStoredItem(key) {
   return storedItem ? JSON.parse(storedItem) : null;
 }
 
+function storedLocalItem(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+function getStoredLocalItem(key) {
+  const storedItem = localStorage.getItem(key);
+  return storedItem ? JSON.parse(storedItem) : null;
+}
+
 // function storageSelectedRoute(city, routeName, from, to) {
 //   const selectedRoute = {
 //     city,
@@ -21,4 +29,4 @@ function getStoredItem(key) {
 //   return JSON.parse(sessionStorage.getItem("selectedRoute"));
 // }
 
-export { storedItem, getStoredItem };
+export { storedItem, getStoredItem, storedLocalItem, getStoredLocalItem };

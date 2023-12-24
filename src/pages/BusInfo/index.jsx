@@ -15,7 +15,7 @@ export const StopsContext = createContext([]);
 
 const BusInfo = () => {
   const [selectedBus, setSelectedBus] = useState(getStoredItem("select"));
-  const [direction, setDirection] = useState(getStoredItem("direction"));
+  const [direction, setDirection] = useState(0);
   const [stops, setStops] = useState([]);
   const [sec, setSec] = useState(0);
   //呼叫api時間

@@ -8,12 +8,15 @@ import {
 
 /*** 公車號碼 ***/
 // 找該縣市的所有公車
-async function getCityAllBus(city) {
+async function getCityAllBus(city, routeUID) {
   try {
     // 取得存在 cookies 的 token
     let tdxToken = await getCookieToken();
+    const filter = routeUID
+      ? `%24filter=RouteUID%20eq%20%27${routeUID}%27&`
+      : "";
     const { data } = await axios.get(
-      `${VITE_APP_SITE}/Route/City/${city}?%24orderby=RouteName%2FZh_tw&%24top=30&%24format=JSON`,
+      `${VITE_APP_SITE}/Route/City/${city}?%24orderby=RouteName%2FZh_tw&${filter}%24top=30&%24format=JSON`,
       {
         headers: {
           Authorization: `Bearer ${tdxToken}`,
@@ -21,26 +24,29 @@ async function getCityAllBus(city) {
         },
       }
     );
-
     //有一樣的 RouteName 時，要特別標出來，因為卡片標題需特別新增補充名稱，如基隆
-    data.forEach((item, index, array) => {
-      console.log(array[index + 1]);
-      if (
-        array[index + 1] &&
-        item.RouteName.Zh_tw === array[index + 1].RouteName.Zh_tw
-      ) {
-        item.isSameName = true;
-        array[index + 1].isSameName = true;
-      } else if (!item.isSameName) {
-        item.isSameName = false;
-      }
-    });
-    console.log(data);
+    const finalData = handleSameRouteName(data);
 
-    return data;
+    return finalData;
   } catch (error) {
     console.log("searchCityBus", error);
   }
+}
+
+//有一樣的 RouteName 時，要特別標出來，因為卡片標題需特別新增補充名稱，如基隆
+function handleSameRouteName(data) {
+  data.forEach((item, index, array) => {
+    if (
+      array[index + 1] &&
+      item.RouteName.Zh_tw === array[index + 1].RouteName.Zh_tw
+    ) {
+      item.isSameName = true;
+      array[index + 1].isSameName = true;
+    } else if (!item.isSameName) {
+      item.isSameName = false;
+    }
+  });
+  return data;
 }
 
 // 找指定縣市、公車號碼的公車
@@ -57,7 +63,9 @@ async function getBusData(city, routeName) {
         },
       }
     );
-    return data;
+    //有一樣的 RouteName 時，要特別標出來，因為卡片標題需特別新增補充名稱，如基隆
+    const finalData = handleSameRouteName(data);
+    return finalData;
   } catch (error) {
     console.log("getBusData", error);
   }
@@ -70,7 +78,7 @@ const getCityBusStop = async (selectedBus) => {
   try {
     // 取得存在 cookies 的 token
     let tdxToken = await getCookieToken();
-    const url = `${VITE_APP_SITE}/StopOfRoute/City/${selectedBus.city.en}/${selectedBus.routeName}?%24filter=routeUID%20eq%20%27${selectedBus.routeUID}%27&%24format=JSON`;
+    const url = `${VITE_APP_SITE}/StopOfRoute/City/${selectedBus.city}/${selectedBus.routeName}?%24filter=routeUID%20eq%20%27${selectedBus.routeUID}%27&%24format=JSON`;
 
     const { data } = await axios.get(url, {
       headers: {
@@ -89,7 +97,7 @@ const getCityBusArrival = async (selectedBus) => {
     // 取得存在 cookies 的 token
     let tdxToken = await getCookieToken();
     // 有把 PlateNumb = -1 篩掉
-    const url = `${VITE_APP_SITE}/EstimatedTimeOfArrival/City/${selectedBus.city.en}/${selectedBus.routeName}?&%24filter=PlateNumb%20ne%20%27-1%27%20and%20RouteUID%20eq%20%27${selectedBus.routeUID}%27&%24format=JSON`;
+    const url = `${VITE_APP_SITE}/EstimatedTimeOfArrival/City/${selectedBus.city}/${selectedBus.routeName}?&%24filter=PlateNumb%20ne%20%27-1%27%20and%20RouteUID%20eq%20%27${selectedBus.routeUID}%27&%24format=JSON`;
 
     const { data } = await axios.get(url, {
       headers: {
@@ -108,7 +116,7 @@ const getArrivalPlateNum = async (selectedBus) => {
   try {
     // 取得存在 cookies 的 token
     let tdxToken = await getCookieToken();
-    const url = `${VITE_APP_SITE}/RealTimeNearStop/City/${selectedBus.city.en}/${selectedBus.routeName}?&%24filter=routeUID%20eq%20%27${selectedBus.routeUID}%27&%24format=JSON`;
+    const url = `${VITE_APP_SITE}/RealTimeNearStop/City/${selectedBus.city}/${selectedBus.routeName}?&%24filter=routeUID%20eq%20%27${selectedBus.routeUID}%27&%24format=JSON`;
 
     const { data } = await axios.get(url, {
       headers: {
@@ -128,7 +136,7 @@ const getBusInfo = async (selectedBus, PlateNumArr) => {
     // 取得存在 cookies 的 token
     let tdxToken = await getCookieToken();
     PlateNumArr = PlateNumArr.join("%20or%20");
-    const url = `${VITE_APP_SITE}/Vehicle/City/${selectedBus.city.en}?%24filter=${PlateNumArr}&%24format=JSON`;
+    const url = `${VITE_APP_SITE}/Vehicle/City/${selectedBus.city}?%24filter=${PlateNumArr}&%24format=JSON`;
 
     const { data } = await axios.get(url, {
       headers: {
@@ -148,7 +156,7 @@ const getBusRealTimeByFrequency = async (selectedBus, PlateNumArr) => {
     // 取得存在 cookies 的 token
     let tdxToken = await getCookieToken();
     PlateNumArr = PlateNumArr.join("%20or%20");
-    const url = `${VITE_APP_SITE}/RealTimeByFrequency/City/${selectedBus.city.en}?%24filter=${PlateNumArr}&%24format=JSON`;
+    const url = `${VITE_APP_SITE}/RealTimeByFrequency/City/${selectedBus.city}?%24filter=${PlateNumArr}&%24format=JSON`;
     console.log(url);
 
     const { data } = await axios.get(url, {

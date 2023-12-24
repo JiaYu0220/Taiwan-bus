@@ -6,6 +6,7 @@ import { useState } from "react";
 import BusArrivalTime from "./pages/BusInfo/components/BusArrivalTime";
 import BusArrivalMap from "./pages/BusInfo/components/BusArrivalMap";
 import NearbyBus from "./pages/NearbyBus";
+import MyFollowing from "./pages/MyFollowing";
 
 function App() {
   const [city, setCity] = useState({
@@ -28,6 +29,7 @@ function App() {
         <Route path="BusArrivalMap" element={<BusArrivalMap />} />
       </Route>
       <Route path="/NearbyBus" element={<NearbyBus />} />
+      <Route path="/MyFollowing" element={<MyFollowing />} />
     </Routes>
   );
 }

@@ -52,7 +52,7 @@ const BtnRadio = ({ onClick, name, id, htmlFor, children, className }) => {
   );
 };
 
-const BtnIcon = ({ onClick, icon, className, variant }) => {
+const BtnIcon = ({ onClick, icon, className }) => {
   const defaultClassName = "hover-scale";
   const finalClassName = className
     ? `${defaultClassName} ${className}`
