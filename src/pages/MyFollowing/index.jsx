@@ -42,12 +42,13 @@ const MyFollowing = () => {
   useEffect(() => {
     storedLocalItem("followList", followList);
     getFollowBus();
+    console.log(busData);
   }, [followList]);
   return (
     <>
       <Container>
         <MyNavbar />
-        {busData ? (
+        {followList.length && busData ? (
           <>
             <Loading isLoading={isLoading} />
             <ul className="list-unstyled">
@@ -79,7 +80,7 @@ const MyFollowing = () => {
           </>
         ) : (
           <>
-            <p>目前沒有追蹤的路線</p>
+            <p className="text-center fs-5 pt-5">目前沒有追蹤的路線</p>
           </>
         )}
       </Container>

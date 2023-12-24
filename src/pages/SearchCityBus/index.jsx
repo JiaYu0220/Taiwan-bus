@@ -8,7 +8,7 @@ import CityBusPanel from "./components/CityBusPanel";
 import BackHome from "../../components/BackHome";
 import SearchBar from "../../components/Inputs";
 import CityBusSearchResult from "./components/CityBusSearchResult";
-import { BtnIcon } from "../../components/Buttons";
+import { BtnIcon, LinkIcon } from "../../components/Buttons";
 
 const SearchCityBus = ({ city, setCity }) => {
   const [busData, setBusData] = useState("");
@@ -38,9 +38,10 @@ const SearchCityBus = ({ city, setCity }) => {
                   searchInput={searchInput}
                   setSearchInput={setSearchInput}
                 />
-                <BtnIcon
-                  className={"bg-primary text-light"}
+                <LinkIcon
+                  className={"bg-primary"}
                   icon={faHeartCirclePlus}
+                  to={"/MyFollowing"}
                 />
               </div>
             </div>

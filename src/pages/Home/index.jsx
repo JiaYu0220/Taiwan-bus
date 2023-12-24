@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLocationDot,
   faMagnifyingGlass,
+  faHeartCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { Button, ToggleButton } from "react-bootstrap";
@@ -45,7 +46,7 @@ const Home = () => {
                 to="/NearbyBus"
               >
                 <FontAwesomeIcon
-                  className="fs-5 fs-sm-1 fs-lg-3 mb-2 mb-sm-1"
+                  className="fs-5 fs-sm-1 fs-lg-3 mb-3 mb-sm-1"
                   icon={faLocationDot}
                 />
 
@@ -58,7 +59,7 @@ const Home = () => {
                 to="/SearchCityBus"
               >
                 <FontAwesomeIcon
-                  className="fs-5 fs-sm-1 fs-lg-3 mb-2 mb-sm-1"
+                  className="fs-5 fs-sm-1 fs-lg-3 mb-3 mb-sm-1"
                   icon={faMagnifyingGlass}
                 />
 
@@ -71,8 +72,8 @@ const Home = () => {
                 to="/MyFollowing"
               >
                 <FontAwesomeIcon
-                  className="fs-5 fs-sm-1 fs-lg-3 mb-2 mb-sm-1"
-                  icon={faMagnifyingGlass}
+                  className="fs-5 fs-sm-1 fs-lg-3 mb-3 mb-sm-1"
+                  icon={faHeartCirclePlus}
                 />
 
                 <p className="fs-sm-5">我的路線</p>
