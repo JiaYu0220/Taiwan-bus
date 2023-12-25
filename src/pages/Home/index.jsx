@@ -43,14 +43,14 @@ const Home = () => {
             <li className="nav-circle nav-circle-primary">
               <NavLink
                 className="h-100 d-flex flex-column justify-content-center align-items-center text-light pe-1 pb-3 p-sm-0 "
-                to="/NearbyBus"
+                to="/MyFollowing"
               >
                 <FontAwesomeIcon
-                  className="fs-5 fs-sm-1 fs-lg-3 mb-3 mb-sm-1"
-                  icon={faLocationDot}
+                  className="fs-5 fs-sm-1 fs-lg-3 mb-2 mb-sm-3"
+                  icon={faHeartCirclePlus}
                 />
 
-                <p className="fw-sm-medium fs-sm-5">附近公車站</p>
+                <p className="fs-sm-5">我的路線</p>
               </NavLink>
             </li>
             <li className="nav-circle nav-circle-white">
@@ -59,7 +59,7 @@ const Home = () => {
                 to="/SearchCityBus"
               >
                 <FontAwesomeIcon
-                  className="fs-5 fs-sm-1 fs-lg-3 mb-3 mb-sm-1"
+                  className="fs-5 fs-sm-1 fs-lg-3 mb-2 mb-sm-3"
                   icon={faMagnifyingGlass}
                 />
 
@@ -69,14 +69,14 @@ const Home = () => {
             <li className="nav-circle nav-circle-warning">
               <NavLink
                 className="h-100 w-100 d-flex flex-column justify-content-center align-items-center text-dark ps-7 pb-1 ps-sm-3 pb-sm-2 p-lg-0 "
-                to="/MyFollowing"
+                to="/NearbyBus"
               >
                 <FontAwesomeIcon
-                  className="fs-5 fs-sm-1 fs-lg-3 mb-3 mb-sm-1"
-                  icon={faHeartCirclePlus}
+                  className="fs-5 fs-sm-1 fs-lg-3 mb-2 mb-sm-3"
+                  icon={faLocationDot}
                 />
 
-                <p className="fs-sm-5">我的路線</p>
+                <p className="fw-sm-medium fs-sm-5">附近公車站</p>
               </NavLink>
             </li>
           </ul>

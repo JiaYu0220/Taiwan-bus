@@ -44,7 +44,7 @@ const CardWithHeart = ({
   // 點擊卡片
   function handleClickCard() {
     const selectBus = {
-      city: bus.City, // 只有英文
+      city: city.en,
       routeUID: bus.RouteUID,
       routeName: bus.RouteName.Zh_tw,
       back: bus.DepartureStopNameZh,

@@ -116,6 +116,7 @@ const getArrivalPlateNum = async (selectedBus) => {
   try {
     // 取得存在 cookies 的 token
     let tdxToken = await getCookieToken();
+    console.log(selectedBus);
     const url = `${VITE_APP_SITE}/RealTimeNearStop/City/${selectedBus.city}/${selectedBus.routeName}?&%24filter=routeUID%20eq%20%27${selectedBus.routeUID}%27&%24format=JSON`;
 
     const { data } = await axios.get(url, {

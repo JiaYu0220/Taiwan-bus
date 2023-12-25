@@ -186,16 +186,14 @@ const BusInfo = () => {
   }
 
   return (
-    <Container>
-      <div className="d-flex flex-column vh-100">
-        <InfoNavbar
-          setDirection={setDirection}
-          direction={direction}
-          selectedBus={selectedBus}
-        />
-        <Outlet context={[direction, stops, sec]} />
-      </div>
-    </Container>
+    <div className="d-flex flex-column vh-100">
+      <InfoNavbar
+        setDirection={setDirection}
+        direction={direction}
+        selectedBus={selectedBus}
+      />
+      <Outlet context={[direction, stops, sec]} />
+    </div>
   );
 };
 

@@ -10,6 +10,7 @@ import {
   useMap,
 } from "react-leaflet";
 import { useOutletContext } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 // 沒用 memo 會造成每秒都執行 setView()，因為父元件的狀態被改變了，雖然 props 的結果沒有變，子元件仍會被重新渲染
 const MapCenter = React.memo(({ center }) => {
@@ -69,7 +70,7 @@ const BusMarker = React.memo(({ stops, direction }) => {
               ]}
             >
               <Popup>
-                {item.StopName.Zh_tw}
+                目前在「{item.StopName.Zh_tw}」
                 <p className="text-primary">
                   <FontAwesomeIcon
                     className={`fs-4 me-1 ${
@@ -131,8 +132,9 @@ const BusArrivalMap = () => {
 
   return (
     <>
-      <p className="text-end text-white my-4">*於 {sec} 秒前更新</p>
-
+      <Container>
+        <p className="text-end text-white my-4">*於 {sec} 秒前更新</p>
+      </Container>
       <MapContainer
         center={[25.08832, 121.48663]}
         zoom={14}

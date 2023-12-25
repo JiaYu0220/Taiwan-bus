@@ -57,7 +57,7 @@ const MyFollowing = () => {
                   <CardWithHeart
                     key={item.RouteUID}
                     bus={item}
-                    city={item.city}
+                    city={item.City}
                     followList={followList}
                     setFollowList={setFollowList}
                     title={
