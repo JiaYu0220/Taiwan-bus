@@ -114,4 +114,4 @@ const CardWithHeart = ({
   );
 };
 
-export { CardWithHeart };
+export { CardWithHeart,CardListLink };

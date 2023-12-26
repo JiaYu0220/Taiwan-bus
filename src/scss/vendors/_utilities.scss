@@ -276,10 +276,15 @@ $utilities: map-merge(
       ),
     ),
     "viewport-height": (
+      responsive: true,
+      //custom
       property: height,
       class: vh,
       values: (
         100: 100vh,
+        50-minus-navbar: calc(50vh - 52px),
+        100-minus-navbar: calc(100vh - 104px),
+        // 104px = navbar height //custom,
       ),
     ),
     "min-viewport-height": (

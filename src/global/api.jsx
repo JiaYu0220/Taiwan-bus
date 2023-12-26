@@ -172,6 +172,28 @@ const getBusRealTimeByFrequency = async (selectedBus, PlateNumArr) => {
   }
 };
 
+/*** 我的附近 ***/
+
+// 取得站位資料
+async function getNearbyStationData(lat, lon, meters) {
+  try {
+    // 取得存在 cookies 的 token
+    let tdxToken = await getCookieToken();
+    const url = `https://tdx.transportdata.tw/api/advanced/v2/Bus/Station/NearBy?%24spatialFilter=nearby%28${lat}%2C%20${lon}%2C%20${meters}%29&%24format=JSON`;
+    console.log(url);
+
+    const { data } = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${tdxToken}`,
+      },
+    });
+    console.log("getNearbyStationData", data);
+    return data;
+  } catch (error) {
+    console.log("getNearbyStationData", error);
+  }
+}
+
 export {
   getCityAllBus,
   getBusData,
@@ -180,4 +202,5 @@ export {
   getArrivalPlateNum,
   getBusInfo,
   getBusRealTimeByFrequency,
+  getNearbyStationData,
 };
