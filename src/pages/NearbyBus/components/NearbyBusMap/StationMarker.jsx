@@ -1,40 +1,17 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo } from "react";
 import ReactDOMServer from "react-dom/server";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBusSimple, faLocationPin } from "@fortawesome/free-solid-svg-icons";
-import {
-  MapContainer,
-  Marker,
-  Polyline,
-  Popup,
-  TileLayer,
-  useMap,
-  useMapEvents,
-} from "react-leaflet";
-import { useOutletContext } from "react-router-dom";
-import { Container } from "react-bootstrap";
-import axios from "axios";
-import { getNearbyStationData } from "../../../global/api";
+import { Marker, Popup, useMap } from "react-leaflet";
+import ViewBusBtn from "../ViewBusBtn";
 
-const LocationMarker = ({ position, setPosition, center, setCenter }) => {
-  const map = useMapEvents({
-    locationfound(e) {
-      setPosition(e.latlng);
-      map.setView(e.latlng, map.getZoom());
-    },
-  });
-  useEffect(() => {
-    map.locate();
-  }, [map]);
-
-  return position === null ? null : (
-    <Marker position={position}>
-      <Popup>我的位置</Popup>
-    </Marker>
-  );
-};
-
-const StationMarker = ({ position, stationData, setStationData, center }) => {
+const StationMarker = ({
+  stationData,
+  center,
+  setSelectStationName,
+  setSelectStationBus,
+  setCurrentList,
+}) => {
   const map = useMap();
   useMemo(() => {
     center && map.flyTo(center, map.getMaxZoom());
@@ -82,6 +59,12 @@ const StationMarker = ({ position, stationData, setStationData, center }) => {
                 公車：
                 {item.Stops.map((stop) => stop.RouteName.Zh_tw).join("、")}
               </p>
+              <ViewBusBtn
+                data={item}
+                setSelectStationName={setSelectStationName}
+                setSelectStationBus={setSelectStationBus}
+                setCurrentList={setCurrentList}
+              />
             </Popup>
           </Marker>
         ))}
@@ -89,37 +72,4 @@ const StationMarker = ({ position, stationData, setStationData, center }) => {
   );
 };
 
-const NearbyBusMap = ({
-  position,
-  setPosition,
-  stationData,
-  center,
-  setCenter,
-}) => {
-  return (
-    <MapContainer
-      center={[23.804064, 121.066217]}
-      zoom={16}
-      maxZoom={18}
-      className="w-100 leaflet-dark h-100"
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <LocationMarker
-        position={position}
-        setPosition={setPosition}
-        center={center}
-        setCenter={setCenter}
-      />
-      <StationMarker
-        position={position}
-        stationData={stationData}
-        center={center}
-      />
-    </MapContainer>
-  );
-};
-
-export default NearbyBusMap;
+export default StationMarker;

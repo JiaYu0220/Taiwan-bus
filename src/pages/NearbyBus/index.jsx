@@ -17,20 +17,35 @@ import {
   getNearbyStationData,
 } from "../../global/api";
 import MyNavbar from "../../components/MyNavbar";
-import NearbyBusMap from "./components/NearbyBusMap";
+import NearbyBusMap from "./components/NearbyBusMap/NearbyBusMap";
 import NearbyBusList from "./components/NearbyBusList";
 
 const NearbyBus = () => {
   const [position, setPosition] = useState(null);
   const [center, setCenter] = useState(null);
   const [stationData, setStationData] = useState([]);
+  const [currentList, setCurrentList] = useState("station"); //route 為該站牌的公車
+  const [selectStationName, setSelectStationName] = useState("");
+  const [selectStationBus, setSelectStationBus] = useState({
+    city: "",
+    routeName: "",
+  });
 
   useEffect(() => {
     position && setData();
   }, [position]);
 
   async function setData() {
-    const data = await getNearbyStationData(position.lat, position.lng, 500);
+    let data = await getNearbyStationData(position.lat, position.lng, 500);
+    console.log(data);
+    // 去除重複的公車
+    data.forEach((station) => {
+      station.Stops = station.Stops.filter(
+        (stop, index, arr) =>
+          index === 0 || arr[index - 1].RouteUID !== stop.RouteUID
+      );
+    });
+    console.log(data);
     setStationData(data);
   }
 
@@ -48,7 +63,12 @@ const NearbyBus = () => {
             <NearbyBusList
               stationData={stationData}
               setCenter={setCenter}
-              className=""
+              currentList={currentList}
+              setCurrentList={setCurrentList}
+              selectStationBus={selectStationBus}
+              setSelectStationBus={setSelectStationBus}
+              selectStationName={selectStationName}
+              setSelectStationName={setSelectStationName}
             />
           </Col>
           <Col md={6} lg={7} className="h-100">
@@ -58,6 +78,9 @@ const NearbyBus = () => {
               stationData={stationData}
               center={center}
               setCenter={setCenter}
+              setCurrentList={setCurrentList}
+              setSelectStationBus={setSelectStationBus}
+              setSelectStationName={setSelectStationName}
             />
           </Col>
         </Row>

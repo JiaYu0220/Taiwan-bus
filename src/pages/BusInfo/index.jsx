@@ -160,13 +160,22 @@ const BusInfo = () => {
   function findArrivalStatus(direction, stopUID) {
     const arrivalObj = arrivalData.find(
       (arrivalItem) =>
-        arrivalItem.StopUID === stopUID && arrivalItem.Direction === direction
+        arrivalItem.StopUID === stopUID &&
+        (arrivalItem.Direction === direction ||
+          (arrivalItem.Direction !== 0 && arrivalItem.Direction !== 1)) // 有些資料的 Direction 數字不是1或0
     );
-    const result = {
-      time: Number(arrivalObj.EstimateTime),
-      status: arrivalObj.StopStatus,
-    };
-    return result;
+
+    const result = arrivalObj
+      ? {
+          time: Number(arrivalObj.EstimateTime),
+          status: arrivalObj.StopStatus,
+        }
+      : // 若 undefined 就當作未發車
+        {
+          time: 0,
+          status: 1,
+        };
+    return result || null;
   }
 
   // 輪椅

@@ -1,16 +1,22 @@
 import React from "react";
-import { CardListLink } from "../../../components/Cards";
-import { useNavigate } from "react-router-dom";
-import { BtnTextLight } from "../../../components/Buttons";
-import { useMapEvents } from "react-leaflet";
+import { CardListLink } from "../../../../components/Cards";
+import { BtnTextLight } from "../../../../components/Buttons";
+import { cityCodeMapping } from "../../../../global/constants";
+import ViewBusBtn from "../ViewBusBtn";
 
-const NearbyBusList = ({ stationData, setCenter }) => {
-  const navigate = useNavigate();
+const StationList = ({
+  stationData,
+  setCenter,
+  setCurrentList,
+  setSelectStationBus,
+  setSelectStationName,
+}) => {
   function handleCardLink(lat, lon) {
     setCenter([lat, lon]);
   }
+
   return (
-    <ul>
+    <>
       {/* 往返站位不重複列出 */}
       {stationData.length &&
         stationData
@@ -32,13 +38,16 @@ const NearbyBusList = ({ stationData, setCenter }) => {
                 )
               }
             >
-              <span>
-                <BtnTextLight>查看公車</BtnTextLight>
-              </span>
+              <ViewBusBtn
+                data={item}
+                setSelectStationName={setSelectStationName}
+                setSelectStationBus={setSelectStationBus}
+                setCurrentList={setCurrentList}
+              />
             </CardListLink>
           ))}
-    </ul>
+    </>
   );
 };
 
-export default NearbyBusList;
+export default StationList;

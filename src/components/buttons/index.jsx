@@ -52,7 +52,7 @@ const BtnRadio = ({ onClick, name, id, htmlFor, children, className }) => {
   );
 };
 
-const BtnIcon = ({ onClick, icon, className }) => {
+const BtnIcon = ({ onClick, icon, className, children }) => {
   const defaultClassName = "hover-scale";
   const finalClassName = className
     ? `${defaultClassName} ${className}`
@@ -61,6 +61,7 @@ const BtnIcon = ({ onClick, icon, className }) => {
   return (
     <Button className={finalClassName} onClick={onClick} variant="link">
       <FontAwesomeIcon className="fs-5" icon={icon} />
+      {children}
     </Button>
   );
 };

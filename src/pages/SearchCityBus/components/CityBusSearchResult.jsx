@@ -9,6 +9,7 @@ const CityBusSearchResult = ({ busData, isLoading, city }) => {
   useEffect(() => {
     const followArray = getStoredLocalItem("followList") || [];
     setFollowList(followArray);
+    console.log(busData);
   }, []);
 
   // 每次增加或刪除追蹤都更新 localStorage
