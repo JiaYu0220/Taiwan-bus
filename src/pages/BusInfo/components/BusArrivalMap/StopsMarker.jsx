@@ -6,7 +6,6 @@ import { Marker, Popup, useMap } from "react-leaflet";
 // 站牌
 const StopsMarker = React.memo(({ stops, direction, polyline }) => {
   const map = useMap();
-  console.log("map", map);
 
   // 更換方向時重新定位中心點和縮放
   useEffect(() => {

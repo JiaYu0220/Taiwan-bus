@@ -13,9 +13,6 @@ const RouteList = ({
   function handleClickBack() {
     setCurrentList("station");
   }
-  useEffect(() => {
-    console.log(selectStationName);
-  }, [selectStationName]);
   return (
     busData.length && (
       <>

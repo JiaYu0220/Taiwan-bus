@@ -64,18 +64,18 @@ const BusInfo = () => {
   async function initData() {
     await getData();
     handleData();
+    // 渲染的資料
     setStops([...stopData]);
-    console.log("渲染資料", stopData);
   }
   async function getData() {
     if (!stopData) {
+      // 站牌
       stopData = await getCityBusStop(selectedBus);
-      console.log("站牌", stopData[direction].Stops);
     }
+    // 抵達時間
     arrivalData = await getCityBusArrival(selectedBus);
-    console.log("抵達時間", arrivalData);
+    //車牌
     plateNumData = await getArrivalPlateNum(selectedBus);
-    console.log("車牌", plateNumData);
 
     let plateNumArr = [];
     // 取得公車是否有斜坡(輪椅友善)資料、公車位置
@@ -85,14 +85,13 @@ const BusInfo = () => {
           `PlateNumb%20eq%20%27${plateItem.PlateNumb.trim()}%27`
         );
       });
+      // 輪椅
       busInfoData = await getBusInfo(selectedBus, plateNumArr);
+      // 公車位置
       busPositionData = await getBusRealTimeByFrequency(
         selectedBus,
         plateNumArr
       );
-
-      console.log("輪椅", busInfoData);
-      console.log("位置", busPositionData);
     }
   }
 

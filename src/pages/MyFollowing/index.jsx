@@ -24,7 +24,6 @@ const MyFollowing = () => {
           item.City = followList[index].city;
         });
         setBusData(finalData);
-        console.log(finalData);
       }
       setIsLoading(false);
     } catch (error) {
@@ -35,14 +34,12 @@ const MyFollowing = () => {
   useEffect(() => {
     const followArray = getStoredLocalItem("followList") || [];
     setFollowList(followArray);
-    console.log(followArray);
   }, []);
 
   // 每次增加或刪除追蹤都更新 localStorage
   useEffect(() => {
     storedLocalItem("followList", followList);
     getFollowBus();
-    console.log(busData);
   }, [followList]);
   return (
     <>

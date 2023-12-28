@@ -1,26 +1,4 @@
 import axios from "axios";
-// export async function getTdxToken() {
-//   try {
-//     const response = await axios.post(
-//       "https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token",
-//       "grant_type=client_credentials&client_id=alice49885-93ea6fa2-b1be-42fa&client_secret=1fc51d3d-3f92-4465-a54d-342641acee30",
-//       {
-//         headers: {
-//           "Content-Type": "application/x-www-form-urlencoded",
-//         },
-//       }
-//     );
-
-//     console.log("getTdxToken");
-
-//     const { access_token } = response.data;
-//     const tomorrow = new Date();
-//     tomorrow.setDate(tomorrow.getDate() + 1); //86400ms token過期
-//     document.cookie = `tdxToken=${access_token}; expire=${tomorrow.toUTCString()}`;
-//   } catch (error) {
-//     console.error("Failed to fetch Access Token", error);
-//   }
-// }
 
 function getCookies(key) {
   // 從 cookies 取出 token
@@ -46,8 +24,7 @@ async function getTdxToken() {
         "Content-Type": "application/x-www-form-urlencoded",
       },
     });
-    // 在這裡處理成功回應的邏輯
-    // console.log(response.data);
+
     const { access_token } = response.data;
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1); //86400ms token過期
@@ -68,7 +45,6 @@ async function getCookieToken() {
   if (!tdxToken) {
     await getTdxToken();
     tdxToken = getCookies("tdxToken"); // 更新token
-    console.log("get NewToken");
   }
   return tdxToken;
 }

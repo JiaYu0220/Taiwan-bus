@@ -17,7 +17,7 @@ import {
   getNearbyStationData,
 } from "../../global/api";
 import MyNavbar from "../../components/MyNavbar";
-import NearbyBusMap from "./components/NearbyBusMap/NearbyBusMap";
+import NearbyBusMap from "./components/NearbyBusMap";
 import NearbyBusList from "./components/NearbyBusList";
 
 const NearbyBus = () => {
@@ -37,7 +37,6 @@ const NearbyBus = () => {
 
   async function setData() {
     let data = await getNearbyStationData(position.lat, position.lng, 500);
-    console.log(data);
     // 去除重複的公車
     data.forEach((station) => {
       station.Stops = station.Stops.filter(
@@ -45,7 +44,6 @@ const NearbyBus = () => {
           index === 0 || arr[index - 1].RouteUID !== stop.RouteUID
       );
     });
-    console.log(data);
     setStationData(data);
   }
 
