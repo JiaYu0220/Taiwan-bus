@@ -3,12 +3,16 @@ import ReactDOMServer from "react-dom/server";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle, faPerson } from "@fortawesome/free-solid-svg-icons";
 import { Marker, Popup, useMapEvents } from "react-leaflet";
+import { myAlert } from "../../../../components/Alert";
 
 const LocationMarker = ({ position, setPosition }) => {
   const map = useMapEvents({
     locationfound(e) {
       setPosition(e.latlng);
       map.setView(e.latlng, map.getZoom());
+    },
+    locationerror(e) {
+      myAlert.errorModal("定位出現錯誤，請稍後再試！");
     },
   });
 

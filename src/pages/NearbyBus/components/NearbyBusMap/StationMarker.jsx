@@ -8,13 +8,14 @@ import ViewBusBtn from "../ViewBusBtn";
 const StationMarker = ({
   stationData,
   center,
+  position,
   setSelectStationName,
   setSelectStationBus,
   setCurrentList,
 }) => {
   const map = useMap();
   useMemo(() => {
-    center && map.flyTo(center, map.getMaxZoom());
+    center && map.flyTo(center, center === position ? 16 : map.getMaxZoom());
   }, [center]);
   function makeStationIcon(stationName) {
     const stationIconHtml = ReactDOMServer.renderToString(
