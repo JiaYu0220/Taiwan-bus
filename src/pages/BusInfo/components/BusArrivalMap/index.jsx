@@ -60,7 +60,7 @@ const BusArrivalMap = () => {
           </MapContainer>
         </>
       ) : (
-        <Loading isLoading={!polyline.length} />
+        <Loading />
       )}
     </>
   );

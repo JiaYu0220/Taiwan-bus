@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWheelchair } from "@fortawesome/free-solid-svg-icons";
 import { Badge, Col, Container, Row } from "react-bootstrap";
 import { useOutletContext } from "react-router-dom";
-import Loading from "../../../components/Loading";
 
 const BusArrivalTime = () => {
   const [direction, stops, sec] = useOutletContext();
@@ -11,7 +10,6 @@ const BusArrivalTime = () => {
   return (
     <>
       <div className="bg-gray flex-grow-1">
-        <Loading isLoading={!stops?.[direction]?.Stops} />
         <Container>
           <Row className="justify-content-center">
             <Col sm={8}>
