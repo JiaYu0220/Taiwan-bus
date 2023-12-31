@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLocationDot,
@@ -7,7 +6,6 @@ import {
   faHeartCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-import { Button, ToggleButton } from "react-bootstrap";
 
 const Home = () => {
   return (
@@ -32,7 +30,7 @@ const Home = () => {
           </h1>
           <footer className="align-self-end align-self-lg-start">
             <p className="mb-4 fs-8 fs-sm-7">
-              Taiwan Bus © Code: jiayu / Design: KT
+              Taiwan Bus © Code: jiayu / Design: KT / Data: 交通部 TDX 資料
             </p>
           </footer>
         </div>
