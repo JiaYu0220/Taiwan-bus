@@ -6,6 +6,7 @@ import {
   faHeartCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 const Home = () => {
   return (
@@ -18,7 +19,7 @@ const Home = () => {
       <div className="circle circle-5 d-none d-sm-block"></div>
       <div className="circle circle-6 d-none d-lg-block"></div>
 
-      <div className="container-fluid">
+      <Container fluid="sm">
         {/* logo 和 footer */}
         <div className="vh-100 d-flex flex-column justify-content-between">
           <h1 className="mt-6 ms-5 mt-sm-16 ms-sm-11 ms-lg-8">
@@ -79,7 +80,7 @@ const Home = () => {
             </li>
           </ul>
         </nav>
-      </div>
+      </Container>
     </div>
   );
 };
