@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart as fasFaHeart,
   faHeartCirclePlus,
@@ -8,7 +7,9 @@ import CityBusPanel from "./components/CityBusPanel";
 import BackHome from "../../components/BackHome";
 import SearchBar from "../../components/Inputs";
 import CityBusSearchResult from "./components/CityBusSearchResult";
-import { BtnIcon, LinkIcon } from "../../components/Buttons";
+import { LinkIcon } from "../../components/Buttons";
+import Loading from "../../components/Loading";
+import { Container } from "react-bootstrap";
 
 const SearchCityBus = ({ city, setCity }) => {
   const [busData, setBusData] = useState("");
@@ -24,7 +25,7 @@ const SearchCityBus = ({ city, setCity }) => {
 
   return (
     <>
-      <div className="container">
+      <Container>
         {/* 搜尋 */}
         <div>
           {/* input */}
@@ -60,17 +61,17 @@ const SearchCityBus = ({ city, setCity }) => {
         </div>
 
         {/* 搜尋結果 */}
-        <div className="mt-24 mt-sm-32 mt-lg-0 ms-lg-100 flex-grow-1">
+        <div className="mt-24 mt-sm-32 mt-lg-0 ms-lg-100 flex-grow-1 d-flex flex-column vh-100">
           <h1 className="fs-6 fs-lg-5 mb-2 pt-lg-7">
             {city.tw ? city.tw : "請先選擇縣市"}
           </h1>
-          <CityBusSearchResult
-            busData={busData}
-            isLoading={isLoading}
-            city={city}
-          />
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <CityBusSearchResult busData={busData} city={city} />
+          )}
         </div>
-      </div>
+      </Container>
     </>
   );
 };

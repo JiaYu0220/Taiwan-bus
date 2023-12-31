@@ -1,26 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, useLocation, useParams } from "react-router-dom";
-import { LinkIcon } from "../../components/Buttons";
-import BackHome from "../../components/BackHome";
-import { Col, Container, Nav, Row } from "react-bootstrap";
-import {
-  faChevronLeft,
-  faMapLocationDot,
-} from "@fortawesome/free-solid-svg-icons";
-import { getStoredItem } from "../../global/storage";
-import {
-  getCityBusStop,
-  getCityBusArrival,
-  getArrivalPlateNum,
-  getBusInfo,
-  getBusRealTimeByFrequency,
-  getNearbyStationData,
-} from "../../global/api";
+import { Col, Container, Row } from "react-bootstrap";
+import { getNearbyStationData } from "../../global/api";
 import MyNavbar from "../../components/MyNavbar";
 import NearbyBusMap from "./components/NearbyBusMap";
 import NearbyBusList from "./components/NearbyBusList";
+import Loading from "../../components/Loading";
 
 const NearbyBus = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [position, setPosition] = useState(null);
   const [center, setCenter] = useState(null);
   const [stationData, setStationData] = useState([]);
@@ -45,6 +32,7 @@ const NearbyBus = () => {
       );
     });
     setStationData(data);
+    setIsLoading(false);
   }
 
   return (
@@ -58,16 +46,21 @@ const NearbyBus = () => {
             lg={5}
             className="overflow-auto position-sticky start-0 top-0 vh-md-100-minus-navbar vh-50-minus-navbar"
           >
-            <NearbyBusList
-              stationData={stationData}
-              setCenter={setCenter}
-              currentList={currentList}
-              setCurrentList={setCurrentList}
-              selectStationBus={selectStationBus}
-              setSelectStationBus={setSelectStationBus}
-              selectStationName={selectStationName}
-              setSelectStationName={setSelectStationName}
-            />
+            {isLoading ? (
+              <Loading />
+            ) : (
+              <NearbyBusList
+                stationData={stationData}
+                setCenter={setCenter}
+                position={position}
+                currentList={currentList}
+                setCurrentList={setCurrentList}
+                selectStationBus={selectStationBus}
+                setSelectStationBus={setSelectStationBus}
+                selectStationName={selectStationName}
+                setSelectStationName={setSelectStationName}
+              />
+            )}
           </Col>
           <Col md={6} lg={7} className="h-100">
             <NearbyBusMap

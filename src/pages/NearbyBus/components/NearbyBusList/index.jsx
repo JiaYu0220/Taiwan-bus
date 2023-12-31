@@ -6,6 +6,7 @@ import { getBusData } from "../../../../global/api";
 const NearbyBusList = ({
   stationData,
   setCenter,
+  position,
   currentList,
   setCurrentList,
   selectStationBus,
@@ -29,7 +30,7 @@ const NearbyBusList = ({
     currentList === "route" && getAllBus();
   }, [currentList]);
   return (
-    <ul className="list-unstyled">
+    <ul className="list-unstyled vh-md-100-minus-navbar">
       {currentList === "station" && (
         <StationList
           stationData={stationData}
@@ -45,6 +46,8 @@ const NearbyBusList = ({
           selectStationBus={selectStationBus}
           selectStationName={selectStationName}
           busData={busData}
+          setCenter={setCenter}
+          position={position}
         />
       )}
     </ul>
