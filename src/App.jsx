@@ -7,6 +7,7 @@ import BusArrivalTime from "./pages/BusInfo/components/BusArrivalTime";
 import BusArrivalMap from "./pages/BusInfo/components/BusArrivalMap";
 import NearbyBus from "./pages/NearbyBus";
 import MyFollowing from "./pages/MyFollowing";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const [city, setCity] = useState({
@@ -30,6 +31,9 @@ function App() {
       </Route>
       <Route path="/NearbyBus" element={<NearbyBus />} />
       <Route path="/MyFollowing" element={<MyFollowing />} />
+
+      {/* 404 */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
