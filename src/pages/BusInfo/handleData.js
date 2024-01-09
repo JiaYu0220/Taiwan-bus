@@ -19,10 +19,9 @@ let bus = {
 };
 
 async function getData(selectedBus) {
-  if (!bus.stopData) {
-    // 站牌
-    bus.stopData = await getCityBusStop(selectedBus);
-  }
+  // 站牌
+  bus.stopData = await getCityBusStop(selectedBus);
+
   // 抵達時間
   bus.arrivalData = await getCityBusArrival(selectedBus);
   //車牌
