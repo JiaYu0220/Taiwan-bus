@@ -30,8 +30,9 @@ const Home = () => {
             </picture>
           </h1>
           <footer className="align-self-end align-self-lg-start">
-            <p className="mb-4 fs-8 fs-sm-7">
-              Taiwan Bus © Code: jiayu / Design: KT / Data: 交通部 TDX 資料
+            <p className="mb-4 fs-8 fs-sm-7 text-end text-md-start">
+              Taiwan Bus © <br className="d-md-none" /> Code: jiayu / Design: KT
+              / Data: 交通部 TDX 資料
             </p>
           </footer>
         </div>
