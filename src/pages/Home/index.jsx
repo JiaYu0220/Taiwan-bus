@@ -56,7 +56,7 @@ const Home = () => {
           </li>
           <li className="nav-circle nav-circle-white">
             <NavLink
-              className="h-100 d-flex flex-column justify-content-center align-items-center text-dark me-4 m-sm-0"
+              className="h-100 d-flex flex-column justify-content-center align-items-center text-dark me-4 m-sm-0 pe-3 pe-sm-0"
               to="/SearchCityBus"
             >
               <FontAwesomeIcon
@@ -69,7 +69,7 @@ const Home = () => {
           </li>
           <li className="nav-circle nav-circle-warning">
             <NavLink
-              className="h-100 w-100 d-flex flex-column justify-content-center align-items-center text-dark ps-7 pb-1 ps-sm-3 pb-sm-2 p-lg-0 "
+              className="h-100 w-100 d-flex flex-column justify-content-center align-items-center text-dark ps-12 pb-1 ps-sm-3 pb-sm-2 p-lg-0 "
               to="/NearbyBus"
             >
               <FontAwesomeIcon
@@ -77,7 +77,7 @@ const Home = () => {
                 icon={faLocationDot}
               />
 
-              <p className="fw-sm-medium fs-sm-5">附近公車站</p>
+              <p className="fw-sm-medium fs-sm-5">附近站牌</p>
             </NavLink>
           </li>
         </ul>
