@@ -29,9 +29,9 @@ const myAlert = {
       title,
     });
   },
-  errorModal() {
+  errorModal(text = `發生錯誤，請稍後再試！`) {
     return errorSwal.fire({
-      html: `發生錯誤，請稍後再試！`,
+      html: text,
     });
   },
 };

@@ -5,7 +5,7 @@ import { Marker, Popup } from "react-leaflet";
 
 const BusMarker = React.memo(({ stops, direction }) => {
   const busIcon = new L.Icon({
-    iconUrl: "../../../../busIcon.svg",
+    iconUrl: "busIcon.svg",
     iconSize: [40, 40],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
