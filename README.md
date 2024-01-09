@@ -1,8 +1,15 @@
 # Taiwan-Bus 全台公車動態時刻查詢應用服務 | [DEMO](https://jiayu0220.github.io/taiwan-bus/)
 
-| <img src="https://github.com/JiaYu0220/taiwan-bus/assets/134919211/3ae517ba-0a64-4488-b371-11390961312d" alt="首頁-手機板" height="500">|<img src="https://github.com/JiaYu0220/taiwan-bus/assets/134919211/5d1db1c9-9fdb-465f-bea6-c473631427c7" alt="首頁-桌機板" height="500">|
-|:---:|:---:|
-|**首頁-手機板**|**首頁-桌機板**|
+<table width="100%">
+  <tr>
+  <td width="30%"><img src="https://github.com/JiaYu0220/taiwan-bus/assets/134919211/3ae517ba-0a64-4488-b371-11390961312d" alt="首頁-手機板"></td>
+  <td width="70%"><img src="https://github.com/JiaYu0220/taiwan-bus/assets/134919211/5d1db1c9-9fdb-465f-bea6-c473631427c7" alt="首頁-桌機板"></td>
+  </tr>
+  <tr>
+  <td width="30%">首頁-手機板</td>
+  <td width="70%">首頁-桌機板</td>
+  </tr>
+</table>
 
 ## 作品說明
 
