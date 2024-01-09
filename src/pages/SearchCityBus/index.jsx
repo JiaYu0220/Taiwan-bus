@@ -29,7 +29,7 @@ const SearchCityBus = ({ city, setCity }) => {
         {/* 搜尋 */}
         <div>
           {/* input */}
-          <div className="position-fixed top-0">
+          <div className="position-fixed top-0 bg-dark z-3">
             <div className="w-100 w-lg-360px shadow-dark shadow-lg-none py-4 py-sm-6 pb-lg-4">
               <div className="d-flex align-items-center">
                 <div className="me-3 me-lg-2">
