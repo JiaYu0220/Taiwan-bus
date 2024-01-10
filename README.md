@@ -1,6 +1,15 @@
-# Taiwan-Bus 全台公車動態時刻查詢應用服務
+# Taiwan-Bus 全台公車動態時刻查詢應用服務 | [DEMO](https://jiayu0220.github.io/taiwan-bus/)
 
-- [DEMO](https://jiayu0220.github.io/taiwan-bus/)
+<table width="100%">
+  <tr>
+  <td width="30%"><img src="https://github.com/JiaYu0220/taiwan-bus/assets/134919211/3ae517ba-0a64-4488-b371-11390961312d" alt="首頁-手機板"></td>
+  <td width="70%"><img src="https://github.com/JiaYu0220/taiwan-bus/assets/134919211/5d1db1c9-9fdb-465f-bea6-c473631427c7" alt="首頁-桌機板"></td>
+  </tr>
+  <tr>
+  <td width="30%">首頁-手機板</td>
+  <td width="70%">首頁-桌機板</td>
+  </tr>
+</table>
 
 ## 作品說明
 
@@ -23,9 +32,9 @@
 
 ## 安裝
 
-本專案使用 React Vite 開發，並部署到 Github Pages
+- 本專案使用 React Vite 開發，並部署到 Github Pages
 
-Node.js 版本建議為：`18.16.0` 以上
+- Node.js 版本建議為：`18.16.0` 以上
 
 ### 取得專案
 
@@ -61,17 +70,18 @@ http://localhost:5173/
 
 ## 資料夾說明
 
-- public - 圖片
-- src - 要編譯檔案
-  - components - 共用元件
-  - global - 共用 function
-  - scss - 共用 scss
-  - pages - 畫面放置處
-    - Home - 首頁
-    - SearchCityBus - 搜尋公車頁面
-    - BusInfo - 公車到站資訊頁面
-    - MyFollowing - 我的收藏頁面
-    - NearbyBus - 我的位置頁面
+```
+|- public - 圖片
+|- src - 要編譯檔案
+    |- components - 共用元件
+    |- global - 共用 function
+    |- pages - 畫面放置處
+        |- Home - 首頁
+        |- SearchCityBus - 搜尋公車頁面
+        |- BusInfo - 公車到站資訊頁面
+        |- MyFollowing - 我的收藏頁面
+        |- NearbyBus - 我的位置頁面
+```     
 
 ## 專案技術
 
