@@ -1,4 +1,4 @@
-# Taiwan-Bus 全台公車動態時刻查詢應用服務 | [DEMO](https://jiayu0220.github.io/taiwan-bus/)
+# Taiwan-Bus 全台公車動態時刻查詢應用服務 | <a href="https://jiayu0220.github.io/taiwan-bus/" target="_blank">DEMO</a>
 
 <table width="100%">
   <tr>
