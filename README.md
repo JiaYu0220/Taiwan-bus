@@ -26,9 +26,21 @@
 
 - 查詢公車 -> 查看公車到站時間 -> 查看公車和站牌位置
 
+  ![查詢公車](https://github.com/JiaYu0220/taiwan-bus/assets/134919211/c653bd39-21c2-4c2f-9164-da92db802ea5)
+
+
 - 加入收藏 -> 查看我的收藏 -> 刪除收藏
 
+  ![我的路線](https://github.com/JiaYu0220/taiwan-bus/assets/134919211/63ac0b1e-7005-4b81-a8ea-cf51143d5ace)
+
+
+
 - 查看我的位置附近站牌 -> 查看某站牌公車
+  - 記得打開存取位置權限
+  - 有時候定位會跑掉，[React Leaflet 官網範例](https://react-leaflet.js.org/docs/example-events/)也是相同情形
+    
+   ![我的位置](https://github.com/JiaYu0220/taiwan-bus/assets/134919211/7ed6f074-1510-404a-96a9-b3d61a26a600)
+
 
 ## 安裝
 
