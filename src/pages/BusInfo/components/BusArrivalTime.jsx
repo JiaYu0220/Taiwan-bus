@@ -5,7 +5,7 @@ import { Badge, Col, Container, Row } from "react-bootstrap";
 import { useOutletContext } from "react-router-dom";
 
 const BusArrivalTime = () => {
-  const [direction, stops, sec] = useOutletContext();
+  const [direction, stops, sec, selectedBus] = useOutletContext();
 
   return (
     <>
@@ -25,12 +25,12 @@ const BusArrivalTime = () => {
                           key={stop.StopUID}
                           className="d-flex justify-content-between align-items-center"
                         >
-                          <p className="text-primary">
+                          <div className="d-flex justify-content-between text-primary">
                             {stop.StopStatus === 4 ? (
                               <Badge
                                 bg="dark"
                                 text="gray-light"
-                                className="me-3 w-80px"
+                                className="me-3 px-4"
                               >
                                 今日停駛
                               </Badge>
@@ -38,7 +38,7 @@ const BusArrivalTime = () => {
                               <Badge
                                 bg="dark"
                                 text="gray-light"
-                                className="me-3 w-80px"
+                                className="me-3 px-4 w-80px"
                               >
                                 末班駛離
                               </Badge>
@@ -46,7 +46,7 @@ const BusArrivalTime = () => {
                               <Badge
                                 bg="gray-light"
                                 text="light"
-                                className="me-3 w-80px"
+                                className="me-3 px-4 w-80px"
                               >
                                 未發車
                               </Badge>
@@ -55,7 +55,7 @@ const BusArrivalTime = () => {
                               <Badge
                                 bg="primary"
                                 text="dark"
-                                className="me-3 w-80px"
+                                className="me-3 px-4 w-80px"
                               >
                                 進站中
                               </Badge>
@@ -64,7 +64,7 @@ const BusArrivalTime = () => {
                               <Badge
                                 bg="transparent"
                                 text="light"
-                                className="me-3 w-80px border border-primary shadow"
+                                className="me-3 px-4 w-80px border border-primary shadow"
                               >
                                 {Math.floor(parseFloat(stop.EstimateTime) / 60)}{" "}
                                 分
@@ -73,7 +73,7 @@ const BusArrivalTime = () => {
                               <Badge
                                 bg="transparent"
                                 text="primary"
-                                className="me-3 w-80px border border-primary shadow"
+                                className="me-3 px-4 w-80px border border-primary shadow"
                               >
                                 {Math.floor(parseFloat(stop.EstimateTime) / 60)}{" "}
                                 分
@@ -83,16 +83,26 @@ const BusArrivalTime = () => {
                               <Badge
                                 bg="gray-light"
                                 text="light"
-                                className="me-3 w-80px"
+                                className="me-3 px-4 w-80px"
                               >
                                 未發車
                               </Badge>
                             )}
-                            {stop.StopName.Zh_tw}
-                            <span className="text-light fs-7 fw-lighter ms-1">
-                              {stop.isStopSameSide ? "(往返站牌同側)" : ""}
-                            </span>
-                          </p>
+                            <div className="d-flex flex-wrap align-items-center">
+                              {stop.StopName.Zh_tw}
+                              <span
+                                className={`text-light fs-7 fw-lighter ms-1 ${
+                                  // 往返站牌沒同側或單項公車都不顯示
+                                  !stop.isStopSameSide ||
+                                  selectedBus.forth === selectedBus.back
+                                    ? "d-none"
+                                    : ""
+                                }`}
+                              >
+                                (往返站牌同側)
+                              </span>
+                            </div>
+                          </div>
                           <div className="d-flex align-items-center gap-3">
                             <p className="text-primary">
                               <FontAwesomeIcon

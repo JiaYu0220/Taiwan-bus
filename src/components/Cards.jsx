@@ -74,8 +74,8 @@ const CardWithHeart = React.memo(
                 { city: city, routeUID: bus.RouteUID },
               ]);
 
-          const followResult = `已${isFollow ? "取消" : "加入"}追蹤`;
-          myAlert.miniToast(followResult);
+          // const followResult = `已${isFollow ? "取消" : "加入"}追蹤`;
+          // myAlert.miniToast(followResult);
 
           setIsFollow(!isFollow);
         }

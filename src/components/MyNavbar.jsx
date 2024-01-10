@@ -13,8 +13,8 @@ const MyNavbar = () => {
 
   return (
     <div className="mb-26">
-      <header className="position-fixed top-0 start-0 end-0 w-100 mb-26 bg-dark z-3">
-        <Container className="">
+      <header className="position-fixed top-0 start-0 end-0 w-100 bg-dark z-3">
+        <Container>
           <Row className=" justify-content-between align-items-center my-6">
             <Col className="text-start">
               <LinkIcon icon={faChevronLeft} to={-1} />

@@ -4,8 +4,8 @@ import MyNavbar from "../../../components/MyNavbar";
 
 const InfoNavbar = ({ setDirection, direction, selectedBus }) => {
   return (
-    <>
-      <Container>
+    <div className="mb-37">
+      <Container className="position-fixed top-0 start-0 end-0 w-100 bg-dark z-3">
         <MyNavbar />
         <Row className="justify-content-center">
           <Col sm={6}>
@@ -25,7 +25,12 @@ const InfoNavbar = ({ setDirection, direction, selectedBus }) => {
                   {selectedBus.forth}
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item>
+              <Nav.Item
+                className={
+                  // 單向公車不顯示回去方向
+                  selectedBus.forth === selectedBus.back ? "d-none" : ""
+                }
+              >
                 <Nav.Link
                   eventKey="back"
                   onClick={() => {
@@ -40,7 +45,7 @@ const InfoNavbar = ({ setDirection, direction, selectedBus }) => {
           </Col>
         </Row>
       </Container>
-    </>
+    </div>
   );
 };
 

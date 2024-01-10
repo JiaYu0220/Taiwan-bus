@@ -57,7 +57,11 @@ const BusInfo = () => {
         direction={direction}
         selectedBus={selectedBus}
       />
-      {isLoading ? <Loading /> : <Outlet context={[direction, stops, sec]} />}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Outlet context={[direction, stops, sec, selectedBus]} />
+      )}
     </div>
   );
 };
