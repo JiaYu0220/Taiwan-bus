@@ -1,4 +1,4 @@
-# Taiwan-Bus 全台公車動態時刻查詢應用服務 | <a href="https://jiayu0220.github.io/taiwan-bus/" target="_blank">DEMO</a>
+# Taiwan-Bus 全台公車動態時刻查詢應用服務 | [DEMO](https://jiayu0220.github.io/taiwan-bus/)
 
 <table width="100%">
   <tr>
@@ -25,6 +25,7 @@
 ## 功能、畫面
 
 - 查詢公車 -> 查看公車到站時間 -> 查看公車和站牌位置
+  - 20 秒更新一次(參考台灣等公車app)
 
   ![查詢公車](https://github.com/JiaYu0220/taiwan-bus/assets/134919211/c653bd39-21c2-4c2f-9164-da92db802ea5)
 
@@ -97,13 +98,13 @@ http://localhost:5173/
 
 ## 專案技術
 
-- Node.js `^18.16.0`
-- React `^18.2.0`
-- Vite `^4.4.5`
-- react-router-dom `^6.16.0`
-- axios `^1.5.1`
-- bootstrap `^5.3.2`、react-bootstrap `^2.9.0`
-- leaflet `^1.9.4`、react-leaflet `^4.2.1`
-- sweetalert2 `^11.10.1`、sweetalert2-react-content `^5.0.7`
+- Node.js `v18.16.0`
+- React `v18.2.0`
+- Vite `v4.4.5`
+- react-router-dom `v6.16.0`
+- axios `v1.5.1`
+- bootstrap `v5.3.2`、react-bootstrap `^2.9.0`
+- leaflet `v1.9.4`、react-leaflet `v4.2.1`
+- sweetalert2 `v11.10.1`、sweetalert2-react-content `v5.0.7`
 
 
