@@ -15,29 +15,21 @@ const BusInfo = () => {
 
   useEffect(() => {
     initData();
-    //取得呼叫api時間
-    let getApiTime = new Date().getTime();
-
     //計算距離上次呼叫api過幾秒
     const addSec = setInterval(() => {
-      let nowTime = new Date().getTime();
-      setSec(Math.floor((nowTime - getApiTime) / 1000));
+      setSec((prevSec) => {
+        // 20 秒取一次 api
+        if (prevSec === 19) {
+          initData();
+          return 0; // 歸零
+        } else {
+          return prevSec + 1; // 遞增
+        }
+      });
     }, 1000);
 
-    //每30秒重新呼叫api
-    const intervalGetApi = setInterval(() => {
-      initData();
-      //取得呼叫api時間
-      getApiTime = new Date().getTime();
-    }, 30000);
-
     return () => {
-      if (addSec) {
-        clearInterval(addSec);
-      }
-      if (intervalGetApi) {
-        clearInterval(intervalGetApi);
-      }
+      clearInterval(addSec);
     };
   }, []);
 
